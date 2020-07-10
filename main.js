@@ -72,6 +72,27 @@ module.exports.loop = function () {
                         );
                     }
                 });
+
+            // If that still returns nothing, then we should check the storage
+            // If it's reasonably full, then let's increase the wall limit by 1k
+            if (closestDamagedStructure == null) {
+                var total_storage = 0;
+                var storages = creep.room.find(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return (structure.structureType == STRUCTURE_STORAGE)
+                    }
+                });
+                for (var n in storages) {
+                    var storage = storages[n];
+                    total_storage += storage.store.getUsedCapacity();
+                }
+                console.log("Total of", total_storage, "in energy storage");
+                if (total_storage > 250000) {
+                    WALL_HEALTH += 1000;
+                    WALL_HEALTH = max(WALL_HEALTH);
+                }
+            }
+
             }
             if(closestDamagedStructure) {
                 tower.repair(closestDamagedStructure);
