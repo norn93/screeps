@@ -77,7 +77,7 @@ module.exports.loop = function () {
             // If it's reasonably full, then let's increase the wall limit by 1k
             if (closestDamagedStructure == null) {
                 var total_storage = 0;
-                var storages = creep.room.find(FIND_STRUCTURES, {
+                var storages = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_STORAGE)
                     }
