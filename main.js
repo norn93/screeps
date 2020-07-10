@@ -8,6 +8,8 @@ var WALL_HEALTH = 10000;
 module.exports.loop = function () {
     
     console.log("=======================TICK=======================")
+
+    console.log("Test")
     
     console.log("TODO: Make a small standing army");
     console.log("TODO: Modularise some of the code");
