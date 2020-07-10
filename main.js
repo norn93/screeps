@@ -86,7 +86,6 @@ module.exports.loop = function () {
                     var storage = storages[n];
                     total_storage += storage.store.getUsedCapacity();
                 }
-                console.log("Total of", total_storage, "in energy storage");
                 if (total_storage > 250000) {
                     WALL_HEALTH += 1000;
                     WALL_HEALTH = max(WALL_HEALTH);
@@ -99,6 +98,8 @@ module.exports.loop = function () {
             }
         }
     }
+
+    console.log("Current WALL_HEALTH setpoint:" WALL_HEALTH);
     
     console.log("CPU in bucket:", Game.cpu.bucket);
     if(Game.cpu.bucket > 9000) {
