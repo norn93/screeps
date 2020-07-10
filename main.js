@@ -87,7 +87,7 @@ module.exports.loop = function () {
                 }
                 if (total_storage > 250000) {
                     WALL_HEALTH += 1000;
-                    WALL_HEALTH = max(WALL_HEALTH, 100000);
+                    WALL_HEALTH = Math.max(WALL_HEALTH, 100000);
                 }
             }
 
