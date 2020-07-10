@@ -9,8 +9,7 @@ module.exports.loop = function () {
     
     console.log("=======================TICK=======================")
 
-    console.log("Test")
-    
+    console.log("TODO: Automate testing code");
     console.log("TODO: Make a small standing army");
     console.log("TODO: Modularise some of the code");
 
@@ -88,7 +87,7 @@ module.exports.loop = function () {
                 }
                 if (total_storage > 250000) {
                     WALL_HEALTH += 1000;
-                    WALL_HEALTH = max(WALL_HEALTH);
+                    WALL_HEALTH = max(WALL_HEALTH, 100000);
                 }
             }
 
