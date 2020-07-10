@@ -199,4 +199,9 @@ module.exports.loop = function () {
             5  // group these notifications for 5 minutes
         );
     }
+
+    Game.notify(
+        'Code is running',
+        60*24  // group these notifications each day
+    );
 }
