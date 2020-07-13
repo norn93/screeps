@@ -17,6 +17,7 @@ function spawnCreep(role, work=2, carry=1, move=1) {
         console.log("Parts:", parts);
         var name = role + Game.time;
         console.log("Name:", name);
+        Game.spawns['Spawn1'].spawnCreep(parts, name, {memory: {role: role}});
     } else {
         console.log(role, "is not a valid role");
     }
