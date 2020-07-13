@@ -22,7 +22,7 @@ var roleFreight = {
         }
 
         // If we're empty, or nearly empty, refill
-        if(creep.store.getFreeCapacity() >= creep.store.getCapacity() - 50) { // fix to force refills when nearly empty
+        if(creep.store.getFreeCapacity() == creep.store.getCapacity()) {
             var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_STORAGE);
