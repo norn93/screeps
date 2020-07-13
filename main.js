@@ -4,9 +4,7 @@ var roleBuilder = require('role.builder');
 var roleFreight = require('role.freight');
 var roleTower = require('role.tower');
 
-var test = require('testFunctions');
-
-var WALL_HEALTH = 10000;
+var test = require('testFunction');
 
 module.exports.loop = function () {
     
@@ -37,8 +35,6 @@ module.exports.loop = function () {
     // COnsole prints
     var rcl = Game.spawns['Spawn1'].room.controller.level;
     console.log("RCL:", rcl);
-
-    console.log("Current WALL_HEALTH setpoint:", WALL_HEALTH);
     
     // Make pixels when we have spare CPU in our bucket
     console.log("CPU in bucket:", Game.cpu.bucket);
