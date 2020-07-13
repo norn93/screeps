@@ -111,7 +111,7 @@ module.exports.loop = function () {
     }
     
     // Then make a builder
-    if (builders.length < 1 && harvesters.length >= harvesters_setpoint && freights.length > 0) {
+    if (builders.length < builders_setpoint && harvesters.length >= harvesters_setpoint && freights.length > 0) {
         var newName = 'Builder' + Game.time;
         console.log('Spawning new builder: ' + newName);
         if (spawn_energy < 450) {
