@@ -10,7 +10,6 @@ module.exports.loop = function () {
     
     console.log("=======================TICK=======================");
 
-    console.log("TODO: Continue to modularise the code");
     console.log("TODO: Deal with healers");
     console.log("TODO: Automatically scale builder setpoint");
     console.log("TODO: Play with links");
@@ -19,8 +18,8 @@ module.exports.loop = function () {
     // Constants
     var harvesters_setpoint = 4;
     var freights_setpoint = 1;
-    var builders_setpoint = 1;
-    var upgraders_setpoint = 6;
+    var builders_setpoint = 5;
+    var upgraders_setpoint = 7;
 
     // Clear memory
     for (var name in Memory.creeps) {
@@ -98,6 +97,13 @@ module.exports.loop = function () {
             spawnCreep("harvester", 3, 1, 2);
         }
     }
+
+    // Check if there's any building to do
+    var targets = Game.spawns['Spawn1'].room.find(FIND_CONSTRUCTION_SITES);
+    if(targets.length == 0) {
+        // We shouldn't build
+        builders_setpoint = 0;
+    }
     
     // Then make a builder
     if (builders.length < builders_setpoint &&
@@ -110,7 +116,7 @@ module.exports.loop = function () {
         }
     }
 
-    // Then make 7 upgraders
+    // Then make a few upgraders
     if (upgraders.length < upgraders_setpoint &&
         builders.length >= builders_setpoint &&
         harvesters.length >= harvesters_setpoint &&
