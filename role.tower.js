@@ -31,7 +31,7 @@ var roleTower = {
             // We're not being attacked
             
             // Find closest damaged non defensive structure
-            var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
+            var structureToRepair = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (
                         structure.hits < structure.hitsMax &&
@@ -41,12 +41,12 @@ var roleTower = {
                 }
             });
 
-            if (closestDamagedStructure == null) {
+            if (structureToRepair.length == 0) {
                 // Then we should repair a wall or rampart
-                var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
+                var structureToRepair = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (
-                            structure.hits < WALL_HEALTH &&
+                            structure.hits < Game.spawns['Spawn1'].memory.wallHealth &&
                             (structure.structureType == STRUCTURE_WALL ||
                             structure.structureType == STRUCTURE_RAMPART)
                         );
@@ -55,7 +55,7 @@ var roleTower = {
 
                 // If that still returns nothing, then we should check the storage
                 // If it's reasonably full, then let's increase the wall limit by 1k
-                if (closestDamagedStructure == null) {
+                if (structureToRepair.length == 0) {
                     var total_storage = 0;
                     var storages = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES, {
                         filter: (structure) => {
@@ -67,14 +67,25 @@ var roleTower = {
                         total_storage += storage.store.getUsedCapacity();
                     }
                     if (total_storage > 250000) {
-                        WALL_HEALTH += 1000;
-                        WALL_HEALTH = Math.min(WALL_HEALTH, 100000);
+                        Game.spawns['Spawn1'].memory.wallHealth += 1000;
+                        Game.spawns['Spawn1'].memory.wallHealth = Math.min(Game.spawns['Spawn1'].memory.wallHealth, 100000);
                     }
                 }
 
             }
-            if(closestDamagedStructure) {
-                tower.repair(closestDamagedStructure);
+
+            // Repair the weakest structure
+            if(structureToRepair.length) {
+                var min_health = structureToRepair[0].hits;
+                var most_hurt_structure;
+                for (var i in structureToRepair) {
+                    var structure = structureToRepair[i];
+                    if (structure.hits < min_health) {
+                        min_health = structure.hits;
+                        most_hurt_structure = structure;
+                    }
+                }
+                tower.repair(most_hurt_structure);
             }
         }
     }
