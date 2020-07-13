@@ -69,6 +69,7 @@ module.exports.loop = function () {
     console.log('Upgraders: ' + upgraders.length);
 
     spawnCreep("Test", 350);
+    spawnCreep("builder", 550);
 
     // Get 1 harvester
     if (harvesters.length < harvesters_setpoint && freights.length == 0) {
