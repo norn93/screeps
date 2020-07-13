@@ -4,6 +4,8 @@ var roleBuilder = require('role.builder');
 var roleFreight = require('role.freight');
 var roleTower = require('role.tower');
 
+var test = require('testFunctions');
+
 var WALL_HEALTH = 10000;
 
 module.exports.loop = function () {
@@ -22,6 +24,7 @@ module.exports.loop = function () {
         }
     }
     
+    // Check if we're being attacked or not
     var hostiles = Game.spawns['Spawn1'].room.find(FIND_HOSTILE_CREEPS);
     if(hostiles.length) {
         // If we can see hostiles, then we're being attacked
@@ -31,6 +34,7 @@ module.exports.loop = function () {
         Game.spawns['Spawn1'].memory.roomAttacked = false;
     }
 
+    // COnsole prints
     var rcl = Game.spawns['Spawn1'].room.controller.level;
     console.log("RCL:", rcl);
 
