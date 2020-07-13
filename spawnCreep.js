@@ -1,4 +1,4 @@
-function spawnCreep(role, work, carry, move) {
+function spawnCreep(role, work=2, carry=1, move=1) {
     console.log("Spawning a new creep with role:", role);
     var roles = ["builder", "harvester", "freight", "upgrader"];
     var valid_role = roles.includes(role);
