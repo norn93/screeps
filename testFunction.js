@@ -1,5 +1,5 @@
-function test() {
-	console.log("Ran test");
+function test(a) {
+	console.log("Ran test", a);
 }
 
 module.exports = test;

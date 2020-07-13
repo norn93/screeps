@@ -14,7 +14,7 @@ module.exports.loop = function () {
     console.log("TODO: Make a small standing army");
     console.log("TODO: Modularise some of the code");
     
-    test();
+    test("lol");
 
     // Clear memory
     for(var name in Memory.creeps) {
