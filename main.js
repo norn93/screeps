@@ -68,8 +68,8 @@ module.exports.loop = function () {
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     console.log('Upgraders: ' + upgraders.length);
 
-    spawnCreep("Test", 350);
-    spawnCreep("builder", 550);
+    spawnCreep("Test");
+    spawnCreep("builder", 1, 2, 3);
 
     // Get 1 harvester
     if (harvesters.length < harvesters_setpoint && freights.length == 0) {
