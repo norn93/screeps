@@ -11,7 +11,7 @@ module.exports.loop = function () {
     console.log("=======================TICK=======================");
 
     console.log("TODO: Deal with healers");
-    console.log("TODO: Automatically scale builder setpoint");
+    console.log("TODO: Automatically scale builder setpoint (TEST?)");
     console.log("TODO: Play with links");
     console.log("TODO: Automate testing code?");    
 
