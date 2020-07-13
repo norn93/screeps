@@ -40,7 +40,7 @@ module.exports.loop = function () {
         Game.spawns['Spawn1'].memory.roomAttacked = false;
     }
 
-    // COnsole prints
+    // Console prints
     var rcl = Game.spawns['Spawn1'].room.controller.level;
     console.log("RCL:", rcl);
     
@@ -55,7 +55,7 @@ module.exports.loop = function () {
     console.log("Energy:", spawn_energy);
     
     if (spawn_energy < 300) {
-        console.log("We are out of energy");
+        console.log("We are out of energy...");
     }
 
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
@@ -75,67 +75,53 @@ module.exports.loop = function () {
 
     // Get 1 harvester
     if (harvesters.length < harvesters_setpoint && freights.length == 0) {
-        var newName = 'Harvester' + Game.time;
-        console.log('Spawning new harvester: ' + newName);
         if (spawn_energy < 450) {
-            Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,MOVE], newName, 
-                {memory: {role: 'harvester'}});
+            spawnCreep("harvester", 2, 1, 1);
         } else {
-            Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,CARRY,MOVE,MOVE], newName, 
-                {memory: {role: 'harvester'}});
+            spawnCreep("harvester", 3, 1, 2);
         }
     }
     
     // Then 1 freight
-    if (freights.length < 1 && harvesters.length > 0) {
-        var newName = 'Freight' + Game.time;
-        console.log('Spawning new freight: ' + newName);
-        
+    if (freights.length < 1 &&
+        harvesters.length > 0) {
         if (spawn_energy < 450) {
-            Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,CARRY,CARRY,MOVE,MOVE], newName, 
-            {memory: {role: 'freight'}});
+            spawnCreep("freight", 0, 4, 2);
         } else {
-            Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE], newName, 
-            {memory: {role: 'freight'}});
+            spawnCreep("freight", 0, 6, 3);
         }
     }
     
     // Then top up harvesters
-    if (harvesters.length < harvesters_setpoint && freights.length > 0) {
-        var newName = 'Harvester' + Game.time;
-        console.log('Spawning new harvester: ' + newName);
+    if (harvesters.length < harvesters_setpoint &&
+        freights.length > 0) {
         if (spawn_energy < 450) {
-            Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,MOVE], newName, 
-                {memory: {role: 'harvester'}});
+            spawnCreep("harvester", 2, 1, 1);
         } else {
-            Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,CARRY,MOVE,MOVE], newName, 
-                {memory: {role: 'harvester'}});
+            spawnCreep("harvester", 3, 1, 2);
         }
     }
     
     // Then make a builder
-    if (builders.length < builders_setpoint && harvesters.length >= harvesters_setpoint && freights.length > 0) {
-        var newName = 'Builder' + Game.time;
-        console.log('Spawning new builder: ' + newName);
+    if (builders.length < builders_setpoint &&
+        harvesters.length >= harvesters_setpoint &&
+        freights.length > 0) {
         if (spawn_energy < 450) {
-            Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,MOVE], newName, 
-                {memory: {role: 'builder'}});
+            spawnCreep("builder", 2, 1, 1);
         } else {
-            Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,CARRY,MOVE,MOVE], newName, 
-                {memory: {role: 'builder'}});
+            spawnCreep("builder", 3, 1, 2);
         }
     }
 
     // Then make 7 upgraders
-    if (upgraders.length < upgraders_setpoint && builders.length >= builders_setpoint && harvesters.length >= harvesters_setpoint && freights.length > 0) {
-        var newName = 'Upgrader' + Game.time;
-        console.log('Spawning new upgrader: ' + newName);
+    if (upgraders.length < upgraders_setpoint &&
+        builders.length >= builders_setpoint &&
+        harvesters.length >= harvesters_setpoint &&
+        freights.length > 0) {
         if (spawn_energy < 450) {
-            Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,MOVE], newName, 
-                {memory: {role: 'upgrader'}});
+            spawnCreep("upgrader", 2, 1, 1);
         } else {
-            Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE], newName, 
-                {memory: {role: 'upgrader'}});
+            spawnCreep("upgrader", 3, 2, 3);
         }
     }
     
