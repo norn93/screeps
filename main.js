@@ -8,17 +8,18 @@ var spawnCreep = require('spawnCreep');
 
 module.exports.loop = function () {
     
-    console.log("=======================TICK=======================")
+    console.log("=======================TICK=======================");
 
     console.log("TODO: Continue to modularise the code");
     console.log("TODO: Deal with healers");
+    console.log("TODO: Automatically scale builder setpoint");
     console.log("TODO: Play with links");
     console.log("TODO: Automate testing code?");    
 
     // Constants
     var harvesters_setpoint = 4;
     var freights_setpoint = 1;
-    var builders_setpoint = 6;
+    var builders_setpoint = 1;
     var upgraders_setpoint = 6;
 
     // Clear memory
