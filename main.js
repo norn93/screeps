@@ -4,7 +4,7 @@ var roleBuilder = require('role.builder');
 var roleFreight = require('role.freight');
 var roleTower = require('role.tower');
 
-var test = require('testFunction');
+var spawnCreep = require('spawnCreep');
 
 module.exports.loop = function () {
     
@@ -19,8 +19,6 @@ module.exports.loop = function () {
     var freights_setpoint = 1;
     var builders_setpoint = 6;
     var upgraders_setpoint = 6;
-    
-    test("test function");
 
     // Clear memory
     for (var name in Memory.creeps) {
@@ -69,6 +67,8 @@ module.exports.loop = function () {
     
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     console.log('Upgraders: ' + upgraders.length);
+
+    spawnCreep("Test", 350);
 
     // Get 1 harvester
     if (harvesters.length < harvesters_setpoint && freights.length == 0) {
