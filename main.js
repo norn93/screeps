@@ -2,6 +2,9 @@ var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleFreight = require('role.freight');
+var roleTower = require('role.tower');
+
+var test = require('testFunctions');
 
 var WALL_HEALTH = 10000;
 
@@ -13,6 +16,7 @@ module.exports.loop = function () {
     console.log("TODO: Make a small standing army");
     console.log("TODO: Modularise some of the code");
 
+    // Clear memory
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];
@@ -20,86 +24,23 @@ module.exports.loop = function () {
         }
     }
     
-    var towers = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES, {
-        filter: (structure) => {
-            return (structure.structureType == STRUCTURE_TOWER);
-        }
-    });
-
-    for(var i in towers) {
-        var tower = towers[i];
-        var hostiles = Game.spawns['Spawn1'].room.find(FIND_HOSTILE_CREEPS);
-        if(hostiles.length > 0) {
-            Game.spawns['Spawn1'].memory.roomAttacked = true;
-            var max_healing_parts = 0;
-            var worst_hostile = hostiles[0];
-            for(var i in hostiles) {
-                var hostile = hostiles[i];
-                var healing_parts = 0;
-                var body_contents = hostile.body;
-                for (var body_element in body_contents) {
-                    var this_part = body_contents[body_element]["type"]
-                    if (this_part == "heal") {
-                        healing_parts += 1;
-                    }
-                }
-                if (healing_parts > max_healing_parts) {
-                    worst_hostile = hostile;
-                }
-            }
-            tower.attack(worst_hostile);
-        } else {
-            Game.spawns['Spawn1'].memory.roomAttacked = false;
-        
-            var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return (
-                        structure.hits < structure.hitsMax &&
-                        structure.structureType != STRUCTURE_WALL &&
-                        structure.structureType != STRUCTURE_RAMPART
-                    );
-                }
-            });
-            if (closestDamagedStructure == null) {
-                // Then we should repair a wall or rampart
-                var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (
-                            structure.hits < WALL_HEALTH &&
-                            (structure.structureType == STRUCTURE_WALL ||
-                            structure.structureType == STRUCTURE_RAMPART)
-                        );
-                    }
-                });
-
-            // If that still returns nothing, then we should check the storage
-            // If it's reasonably full, then let's increase the wall limit by 1k
-            if (closestDamagedStructure == null) {
-                var total_storage = 0;
-                var storages = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_STORAGE)
-                    }
-                });
-                for (var n in storages) {
-                    var storage = storages[n];
-                    total_storage += storage.store.getUsedCapacity();
-                }
-                if (total_storage > 250000) {
-                    WALL_HEALTH += 1000;
-                    WALL_HEALTH = Math.min(WALL_HEALTH, 100000);
-                }
-            }
-
-            }
-            if(closestDamagedStructure) {
-                tower.repair(closestDamagedStructure);
-            }
-        }
+    // Check if we're being attacked or not
+    var hostiles = Game.spawns['Spawn1'].room.find(FIND_HOSTILE_CREEPS);
+    if(hostiles.length) {
+        // If we can see hostiles, then we're being attacked
+        Game.spawns['Spawn1'].memory.roomAttacked = true;
+    } else {
+        // We can't see hostiles, so we aren't being attacked
+        Game.spawns['Spawn1'].memory.roomAttacked = false;
     }
+
+    // COnsole prints
+    var rcl = Game.spawns['Spawn1'].room.controller.level;
+    console.log("RCL:", rcl);
 
     console.log("Current WALL_HEALTH setpoint:", WALL_HEALTH);
     
+    // Make pixels when we have spare CPU in our bucket
     console.log("CPU in bucket:", Game.cpu.bucket);
     if(Game.cpu.bucket > 9000) {
         Game.cpu.generatePixel();
@@ -125,6 +66,7 @@ module.exports.loop = function () {
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     console.log('Upgraders: ' + upgraders.length);
 
+    // Get 1 harvester
     if(harvesters.length < 1 && freights.length == 0) {
         var newName = 'Harvester' + Game.time;
         console.log('Spawning new harvester: ' + newName);
@@ -137,6 +79,7 @@ module.exports.loop = function () {
         }
     }
     
+    // Then 1 freight
     if(freights.length < 1 && harvesters.length > 0) {
         var newName = 'Freight' + Game.time;
         console.log('Spawning new freight: ' + newName);
@@ -150,6 +93,7 @@ module.exports.loop = function () {
         }
     }
     
+    // Then top up harvesters
     if(harvesters.length < 4 && freights.length > 0) {
         var newName = 'Harvester' + Game.time;
         console.log('Spawning new harvester: ' + newName);
@@ -162,7 +106,8 @@ module.exports.loop = function () {
         }
     }
     
-    if(builders.length < 1 && harvesters.length > 2 && freights.length > 0) {
+    // Then make a builder
+    if(builders.length < 1 && harvesters.length > 3 && freights.length > 0) {
         var newName = 'Builder' + Game.time;
         console.log('Spawning new builder: ' + newName);
         if (spawn_energy < 450) {
@@ -174,7 +119,8 @@ module.exports.loop = function () {
         }
     }
 
-    if(upgraders.length < 7 && builders.length > 0 && harvesters.length > 2 && freights.length > 0) {
+    // Then make 7 upgraders
+    if(upgraders.length < 7 && builders.length > 0 && harvesters.length > 3 && freights.length > 0) {
         var newName = 'Upgrader' + Game.time;
         console.log('Spawning new upgrader: ' + newName);
         if (spawn_energy < 450) {
@@ -186,10 +132,7 @@ module.exports.loop = function () {
         }
     }
     
-    
-
-    
-    
+    // Spawn that creep
     if(Game.spawns['Spawn1'].spawning) { 
         var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
         Game.spawns['Spawn1'].room.visual.text(
@@ -199,6 +142,7 @@ module.exports.loop = function () {
             {align: 'left', opacity: 0.8});
     }
 
+    // Assign roles to creeps
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
         if(creep.memory.role == 'harvester') {
@@ -214,7 +158,21 @@ module.exports.loop = function () {
             roleFreight.run(creep);
         }
     }
+
+    // Get a list of towers in the room
+    var towers = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return (structure.structureType == STRUCTURE_TOWER);
+        }
+    });
+
+    // For each tower
+    for(var i in towers) {
+        var tower = towers[i];
+        roleTower.run(tower);
+    }
     
+    // Send an email if we're bing attacked
     if (Game.spawns['Spawn1'].memory.roomAttacked) {
         console.log("We are beng attacked!");
         Game.notify(
@@ -222,9 +180,4 @@ module.exports.loop = function () {
             5  // group these notifications for 5 minutes
         );
     }
-
-    Game.notify(
-        'Code is running',
-        60*24  // group these notifications each day
-    );
 }
