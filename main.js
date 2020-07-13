@@ -13,11 +13,17 @@ module.exports.loop = function () {
     console.log("TODO: Automate testing code");
     console.log("TODO: Make a small standing army");
     console.log("TODO: Modularise some of the code");
+
+    // Constants
+    var harvesters_setpoint = 4;
+    var freights_setpoint = 1;
+    var builders_setpoint = 6;
+    var upgraders_setpoint = 6;
     
-    test("lol");
+    test("test function");
 
     // Clear memory
-    for(var name in Memory.creeps) {
+    for (var name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];
             console.log('Clearing non-existing creep memory:', name);
@@ -26,7 +32,7 @@ module.exports.loop = function () {
     
     // Check if we're being attacked or not
     var hostiles = Game.spawns['Spawn1'].room.find(FIND_HOSTILE_CREEPS);
-    if(hostiles.length) {
+    if (hostiles.length) {
         // If we can see hostiles, then we're being attacked
         Game.spawns['Spawn1'].memory.roomAttacked = true;
     } else {
@@ -40,7 +46,7 @@ module.exports.loop = function () {
     
     // Make pixels when we have spare CPU in our bucket
     console.log("CPU in bucket:", Game.cpu.bucket);
-    if(Game.cpu.bucket > 9000) {
+    if (Game.cpu.bucket > 9000) {
         Game.cpu.generatePixel();
         console.log("Created a pixel!")
     }
@@ -65,7 +71,7 @@ module.exports.loop = function () {
     console.log('Upgraders: ' + upgraders.length);
 
     // Get 1 harvester
-    if(harvesters.length < 1 && freights.length == 0) {
+    if (harvesters.length < harvesters_setpoint && freights.length == 0) {
         var newName = 'Harvester' + Game.time;
         console.log('Spawning new harvester: ' + newName);
         if (spawn_energy < 450) {
@@ -78,7 +84,7 @@ module.exports.loop = function () {
     }
     
     // Then 1 freight
-    if(freights.length < 1 && harvesters.length > 0) {
+    if (freights.length < 1 && harvesters.length > 0) {
         var newName = 'Freight' + Game.time;
         console.log('Spawning new freight: ' + newName);
         
@@ -92,7 +98,7 @@ module.exports.loop = function () {
     }
     
     // Then top up harvesters
-    if(harvesters.length < 4 && freights.length > 0) {
+    if (harvesters.length < harvesters_setpoint && freights.length > 0) {
         var newName = 'Harvester' + Game.time;
         console.log('Spawning new harvester: ' + newName);
         if (spawn_energy < 450) {
@@ -105,7 +111,7 @@ module.exports.loop = function () {
     }
     
     // Then make a builder
-    if(builders.length < 1 && harvesters.length > 3 && freights.length > 0) {
+    if (builders.length < 1 && harvesters.length >= harvesters_setpoint && freights.length > 0) {
         var newName = 'Builder' + Game.time;
         console.log('Spawning new builder: ' + newName);
         if (spawn_energy < 450) {
@@ -118,7 +124,7 @@ module.exports.loop = function () {
     }
 
     // Then make 7 upgraders
-    if(upgraders.length < 7 && builders.length > 0 && harvesters.length > 3 && freights.length > 0) {
+    if (upgraders.length < upgraders_setpoint && builders.length >= builders_setpoint && harvesters.length >= harvesters_setpoint && freights.length > 0) {
         var newName = 'Upgrader' + Game.time;
         console.log('Spawning new upgrader: ' + newName);
         if (spawn_energy < 450) {
@@ -131,7 +137,7 @@ module.exports.loop = function () {
     }
     
     // Spawn that creep
-    if(Game.spawns['Spawn1'].spawning) { 
+    if (Game.spawns['Spawn1'].spawning) { 
         var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
         Game.spawns['Spawn1'].room.visual.text(
             '🛠️' + spawningCreep.memory.role,
@@ -141,7 +147,7 @@ module.exports.loop = function () {
     }
 
     // Assign roles to creeps
-    for(var name in Game.creeps) {
+    for (var name in Game.creeps) {
         var creep = Game.creeps[name];
         if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
@@ -165,7 +171,7 @@ module.exports.loop = function () {
     });
 
     // For each tower
-    for(var i in towers) {
+    for (var i in towers) {
         var tower = towers[i];
         roleTower.run(tower);
     }
