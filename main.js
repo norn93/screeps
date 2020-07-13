@@ -10,9 +10,10 @@ module.exports.loop = function () {
     
     console.log("=======================TICK=======================")
 
-    console.log("TODO: Automate testing code");
-    console.log("TODO: Make a small standing army");
-    console.log("TODO: Modularise some of the code");
+    console.log("TODO: Continue to modularise the code");
+    console.log("TODO: Deal with healers");
+    console.log("TODO: Play with links");
+    console.log("TODO: Automate testing code?");    
 
     // Constants
     var harvesters_setpoint = 4;
