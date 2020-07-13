@@ -79,10 +79,10 @@ var roleTower = {
                 var min_health = structureToRepair[0].hits;
                 var most_hurt_structure;
                 for (var i in structureToRepair) {
-                    var structure = structureToRepair[i];
-                    if (structure.hits < min_health) {
-                        min_health = structure.hits;
-                        most_hurt_structure = structure;
+                    var this_structure = structureToRepair[i];
+                    if (this_structure.hits <= min_health) {
+                        min_health = this_structure.hits;
+                        most_hurt_structure = this_structure;
                     }
                 }
                 tower.repair(most_hurt_structure);

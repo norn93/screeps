@@ -13,6 +13,8 @@ module.exports.loop = function () {
     console.log("TODO: Automate testing code");
     console.log("TODO: Make a small standing army");
     console.log("TODO: Modularise some of the code");
+    
+    test();
 
     // Clear memory
     for(var name in Memory.creeps) {
