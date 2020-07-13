@@ -5,13 +5,13 @@ function spawnCreep(role, work=2, carry=1, move=1) {
     if (valid_role) {
         console.log(role, "is a valid role!");
         var parts = [];
-        for (var i = 0; i <= work; i++) {
+        for (var i = 0; i < work; i++) {
             parts.push(WORK)
         }
-        for (var i = 0; i <= carry; i++) {
+        for (var i = 0; i < carry; i++) {
             parts.push(CARRY)
         }
-        for (var i = 0; i <= move; i++) {
+        for (var i = 0; i < move; i++) {
             parts.push(MOVE)
         }
         console.log("Parts:", parts);
