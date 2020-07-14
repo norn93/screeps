@@ -3,6 +3,7 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleFreight = require('role.freight');
 var roleTower = require('role.tower');
+var roleDefender = require('role.defender');
 
 var spawnCreep = require('spawnCreep');
 
@@ -11,11 +12,11 @@ module.exports.loop = function () {
     console.log("=======================TICK=======================");
 
     console.log("TODO: Deal with healers");
-    console.log("TODO: Automatically scale builder setpoint (TEST?)");
     console.log("TODO: Play with links");
     console.log("TODO: Automate testing code?");    
 
     // Constants
+    var defenders_setpoint = 3;
     var harvesters_setpoint = 4;
     var freights_setpoint = 1;
     var builders_setpoint = 5;
@@ -37,6 +38,7 @@ module.exports.loop = function () {
     } else {
         // We can't see hostiles, so we aren't being attacked
         Game.spawns['Spawn1'].memory.roomAttacked = false;
+        defenders_setpoint = 0;
     }
 
     // Console prints
@@ -69,6 +71,9 @@ module.exports.loop = function () {
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     console.log('Upgraders: ' + upgraders.length);
 
+    var defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender');
+    console.log('Defenders: ' + defenders.length);
+
     // Get 1 harvester
     if (harvesters.length < harvesters_setpoint && freights.length == 0) {
         if (spawn_energy < 450) {
@@ -85,6 +90,16 @@ module.exports.loop = function () {
             spawnCreep("freight", 0, 4, 2);
         } else {
             spawnCreep("freight", 0, 6, 3);
+        }
+    }
+
+    // Then defenders
+    if (freights.length < 0 &&
+        harvesters.length > 0) {
+        if (spawn_energy < (240 + 150 + 100)) {
+            spawnCreep("defender", attack=3, move=3, tough=10);
+        } else {
+            spawnCreep("defender", attack=3, move=5, tough=20);
         }
     }
     
@@ -153,6 +168,9 @@ module.exports.loop = function () {
         if(creep.memory.role == 'freight') {
             roleFreight.run(creep);
         }
+        if(creep.memory.role == 'defender') {
+            roleDefender.run(creep);
+        }
     }
 
     // Get a list of towers in the room
@@ -176,4 +194,6 @@ module.exports.loop = function () {
             5  // group these notifications for 5 minutes
         );
     }
+
+    // Also, if we're bing attacked, spawn a defender
 }
