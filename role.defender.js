@@ -15,7 +15,7 @@ var roleDefender = {
 
         if(creep.memory.defending) {
             // Check our health
-            if (creep.hits < creep.hitsMax) {
+            if (creep.hits < creep.hitsMax * 0.5) {
                 // Then we should go to a rampart
                 var rampart = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
