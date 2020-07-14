@@ -11,7 +11,12 @@ module.exports.loop = function () {
     
     console.log("=======================TICK=======================");
 
-    console.log("TODO: Play with links");
+    console.log("TODO: Make link miner");
+    console.log("TODO: Change upgrader spawn limit and type when links are built");
+    console.log("TODO: Add more states to defenders");
+    console.log("TODO: Add ability for defenders to move on ramparts only");
+    console.log("TODO: Add healers");
+    console.log("TODO: Add wall repairers");
     console.log("TODO: Automate testing code?");    
 
     // Constants
