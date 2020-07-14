@@ -21,7 +21,8 @@ function spawnCreep(role, work=2, carry=1, move=1, attack=0, tough=0) {
 
         var name = role + Game.time;
         console.log("Spawning a new creep with role:", role);
-        Game.spawns['Spawn1'].spawnCreep(parts, name, {memory: {role: role}});
+        var result = Game.spawns['Spawn1'].spawnCreep(parts, name, {memory: {role: role}});
+        console.log(result);
     }
 }
 
