@@ -94,7 +94,7 @@ module.exports.loop = function () {
     }
 
     // Then defenders
-    if (freights.length < 0 &&
+    if (freights.length > 0 &&
         harvesters.length > 0) {
         if (spawn_energy < (240 + 150 + 100)) {
             spawnCreep("defender", attack=3, move=3, tough=10);
