@@ -97,9 +97,9 @@ module.exports.loop = function () {
     if (freights.length > 0 &&
         harvesters.length > 0) {
         if (spawn_energy < (160 + 150 + 100)) {
-            spawnCreep("defender", attack=2, move=3, tough=10);
+            spawnCreep("defender", 0, 0, 3, attack=2, tough=10);
         } else {
-            spawnCreep("defender", attack=3, move=5, tough=20);
+            spawnCreep("defender", 0, 0, 3, attack=5, tough=20);
         }
     }
     
