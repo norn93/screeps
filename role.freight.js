@@ -43,6 +43,17 @@ var roleFreight = {
                             structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0.5 * structure.store.getCapacity(RESOURCE_ENERGY);
                     }
                 });
+                if (targets.length == 0) {
+                    // Then we can afford to work on those extensions
+                    var targets = creep.room.find(FIND_STRUCTURES, {
+                        filter: (structure) => {
+                            return (
+                                structure.structureType == STRUCTURE_EXTENSION ||
+                                structure.structureType == STRUCTURE_SPAWN) &&
+                                structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                        }
+                    });
+                }
             } else {
                 // If we're not being attacked, then fill up extensions and spawn
                 var targets = creep.room.find(FIND_STRUCTURES, {
