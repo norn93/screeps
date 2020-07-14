@@ -29,7 +29,7 @@ var roleDefender = {
                 }
                 // Find targets to attack
                 nearest_hostile = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-                
+
                 creep.attack(nearest_hostile);
             } else {
                 // Find targets to attack
@@ -56,11 +56,12 @@ var roleDefender = {
                 }
             } else {
                 // Time to die
-                // Go to a container
+                // Go to a partially empty container
                 var container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (
-                            structure.structureType == STRUCTURE_CONTAINER
+                            structure.structureType == STRUCTURE_CONTAINER &&
+                            structure.store.getFreeCapacity() > 0
                         );
                     }
                 });
