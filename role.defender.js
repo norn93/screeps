@@ -14,13 +14,28 @@ var roleDefender = {
         }
 
         if(creep.memory.defending) {
-            // Find targets to attack
-            nearest_hostile = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+            // Check our health
+            if (creep.hits < creep.hitsMax) {
+                // Then we should go to a rampart
+                var rampart = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return (
+                            structure.structureType == STRUCTURE_RAMPART
+                        );
+                    }
+                });
+                if(creep.moveTo(rampart) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(rampart, {visualizePathStyle: {stroke: '#ffffff'}});
+                }
+            } else {
+                // Find targets to attack
+                nearest_hostile = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
 
-            // Go to them
-            // Attack them
-            if(creep.attack(nearest_hostile) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(nearest_hostile, {visualizePathStyle: {stroke: '#ffaa00'}});
+                // Go to them
+                // Attack them
+                if(creep.attack(nearest_hostile) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(nearest_hostile, {visualizePathStyle: {stroke: '#ffaa00'}});
+                }
             }
         } else {
             if (creep.ticksToLive > 200) {
