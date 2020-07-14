@@ -23,7 +23,7 @@ var roleDefender = {
                 creep.moveTo(nearest_hostile, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         } else {
-            if (creep.ticksToLive > 200) {
+            if (creep.ticksToLive > 1400) {
                 // Go to a rampart
                 var rampart = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
