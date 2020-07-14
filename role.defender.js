@@ -27,6 +27,9 @@ var roleDefender = {
                 if(creep.moveTo(rampart) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(rampart, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
+                // Find targets to attack
+                nearest_hostile = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+                
                 creep.attack(nearest_hostile);
             } else {
                 // Find targets to attack
