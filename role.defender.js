@@ -42,7 +42,7 @@ var roleDefender = {
             }
         } else {
             // Go to a rampart
-            var rampart = Game.spawns['Spawn1'].room.findClosestByRange(FIND_STRUCTURES, {
+            var rampart = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (
                         structure.structureType == STRUCTURE_RAMPART
