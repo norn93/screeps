@@ -16,23 +16,24 @@ var roleDefender = {
         if(creep.memory.defending) {
             // Find targets to attack
             // Find the creep with the most healing parts
-            var hostiles = Game.spawns['Spawn1'].room.find(FIND_HOSTILE_CREEPS);
-            var max_healing_parts = 0;
-            var worst_hostile = hostiles[0];
-            for(var i in hostiles) {
-                var hostile = hostiles[i];
-                var healing_parts = 0;
-                var body_contents = hostile.body;
-                for (var body_element in body_contents) {
-                    var this_part = body_contents[body_element]["type"]
-                    if (this_part == "heal") {
-                        healing_parts += 1;
-                    }
-                }
-                if (healing_parts > max_healing_parts) {
-                    worst_hostile = hostile;
-                }
-            }
+            // var hostiles = Game.spawns['Spawn1'].room.find(FIND_HOSTILE_CREEPS);
+            // var max_healing_parts = 0;
+            // var worst_hostile = hostiles[0];
+            // for(var i in hostiles) {
+            //     var hostile = hostiles[i];
+            //     var healing_parts = 0;
+            //     var body_contents = hostile.body;
+            //     for (var body_element in body_contents) {
+            //         var this_part = body_contents[body_element]["type"]
+            //         if (this_part == "heal") {
+            //             healing_parts += 1;
+            //         }
+            //     }
+            //     if (healing_parts > max_healing_parts) {
+            //         worst_hostile = hostile;
+            //     }
+            // }
+            worst_hostile = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
 
             // Go to them
             // Attack them
