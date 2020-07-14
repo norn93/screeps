@@ -4,11 +4,11 @@ var roleDefender = {
     run: function(creep) {
 
         // Choose creep state
-        if(creep.memory.defending && Game.spawns['Spawn1'].memory.roomAttacked] == false) {
+        if(creep.memory.defending && Game.spawns['Spawn1'].memory.roomAttacked == false) {
             creep.memory.defending = false;
             creep.say("Peace");
         }
-        if(!creep.memory.defending && Game.spawns['Spawn1'].memory.roomAttacked] == true) {
+        if(!creep.memory.defending && Game.spawns['Spawn1'].memory.roomAttacked == true) {
             creep.memory.defending = true;
             creep.say("Defending!");
         }
