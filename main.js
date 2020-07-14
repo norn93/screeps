@@ -123,6 +123,7 @@ module.exports.loop = function () {
     // Then make a builder
     if (builders.length < builders_setpoint &&
         harvesters.length >= harvesters_setpoint &&
+        defenders.length == defenders_setpoint &&
         freights.length > 0) {
         if (spawn_energy < 450) {
             spawnCreep("builder", 2, 1, 1);
@@ -135,6 +136,7 @@ module.exports.loop = function () {
     if (upgraders.length < upgraders_setpoint &&
         builders.length >= builders_setpoint &&
         harvesters.length >= harvesters_setpoint &&
+        defenders.length == defenders_setpoint &&
         freights.length > 0) {
         if (spawn_energy < 450) {
             spawnCreep("upgrader", 2, 1, 1);
