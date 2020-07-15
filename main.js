@@ -15,7 +15,8 @@ module.exports.loop = function () {
 
     console.log("TODO: Move energy between links");
     console.log("TODO: Make link upgrader");
-    console.log("TODO: Add more states to defenders");
+    console.log("TODO: Improve link miner efficiency");
+    console.log("TODO: Add states to defenders");
     console.log("TODO: Add ability for defenders to move on ramparts only");
     console.log("TODO: Add healers");
     console.log("TODO: Add wall repairers");
