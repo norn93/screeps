@@ -22,8 +22,9 @@ var roleLinkMiner = {
             if (creep.memory.source == null) {
                 creep.say("Source?");
             } else {
-                if(creep.harvest(creep.memory.source) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(creep.memory.source, {visualizePathStyle: {stroke: '#ffaa00'}});
+                var sources = creep.room.find(FIND_SOURCES);
+                if(creep.harvest(sources[creep.memory.source]) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(sources[creep.memory.source], {visualizePathStyle: {stroke: '#ffaa00'}});
                 }
             }
         }
