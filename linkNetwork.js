@@ -9,20 +9,38 @@ function linkNetwork() {
         }
     });
 
+    var senders = [];
+    var receivers = []
     for (var i in links) {
         var link = links[i];
-        console.log(link);
 
         // Now, we can programatically work out what kind of link this is
         // If the link is close to a source, then it's job is to forward to the other link/s
         // that are not near sources i.e. the link is a sender.
 
-        // If the link is not close to a source, then it must be a reciever.
-        // Recievers don't really need to do anything
+        // If the link is not close to a source, then it must be a reciever or a station
+        // Recievers don't really need to do anything, stations might have rules
 
         var closest_source = link.pos.findInRange(FIND_SOURCES, 3);
 
-        console.log("Close source:", closest_source);
+        if (closest_source) {
+            // Then we are a sender
+            // If we are full, transfer as many units as will fit into the reciever
+            senders.push(link);
+        } else {
+            // We might be a reciever
+            receivers.push(link);
+        }
+    }
+
+    // Now, each sender should try to send to a reciever
+    for (var i in senders) {
+        var sender = senders[i];
+        console.log(sender, "should try to send to one of:");
+        for (var i in receivers) {
+            var receiver = receivers[i];
+            console.log(" -", reciever);
+        }
     }
 }
 
