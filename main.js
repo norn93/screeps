@@ -4,6 +4,7 @@ var roleBuilder = require('role.builder');
 var roleFreight = require('role.freight');
 var roleTower = require('role.tower');
 var roleDefender = require('role.defender');
+var roleLinkMiner = require('role.linkMiner');
 
 var spawnCreep = require('spawnCreep');
 
@@ -178,6 +179,9 @@ module.exports.loop = function () {
         }
         if(creep.memory.role == 'defender') {
             roleDefender.run(creep);
+        }
+        if(creep.memory.role == 'linkminer') {
+            roleLinkMiner.run(creep);
         }
     }
 
