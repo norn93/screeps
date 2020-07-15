@@ -25,7 +25,7 @@ function linkNetwork() {
 
         console.log("Closest:", closest_source);
 
-        if (closest_source) {
+        if (closest_source != null) {
             // Then we are a sender
             // If we are full, transfer as many units as will fit into the reciever
             senders.push(link);
