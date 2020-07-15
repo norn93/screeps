@@ -79,6 +79,9 @@ module.exports.loop = function () {
     var defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender');
     console.log('Defenders: ' + defenders.length);
 
+    var linkminers = _.filter(Game.creeps, (creep) => creep.memory.role == 'linkminer');
+    console.log('Link miners: ' + linkminers.length);
+
     // Get 1 harvester
     if (harvesters.length < harvesters_setpoint && freights.length == 0) {
         if (spawn_energy < 450) {
@@ -136,6 +139,19 @@ module.exports.loop = function () {
             spawnCreep("builder", 2, 1, 1);
         } else {
             spawnCreep("builder", 3, 1, 2);
+        }
+    }
+
+    // Then make a link miner
+    if (linkminers.length < linkminers_setpoint &&
+        builders.length >= builders_setpoint &&
+        harvesters.length >= harvesters_setpoint &&
+        defenders.length >= defenders_setpoint &&
+        freights.length > 0) {
+        if (spawn_energy < 450) {
+            spawnCreep("linkminer", 2, 1, 1);
+        } else {
+            spawnCreep("linkminer", 2, 1, 1);
         }
     }
 
