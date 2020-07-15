@@ -231,4 +231,7 @@ module.exports.loop = function () {
         var linkminer = linkminers[i];
         linkminer.memory.source = 0; // We want them to be tied to that first source
     }
+
+    // Run link network
+    linkNetwork();
 }
