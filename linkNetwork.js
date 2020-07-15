@@ -29,7 +29,7 @@ function linkNetwork() {
         // console.log("No list?:", closest_source == []);
         // console.log("False:", closest_source == false);
 
-        if (closest_source) {
+        if (closest_source != false) {
             // Then we are a sender
             // If we are full, transfer as many units as will fit into the reciever
             senders.push(link);
