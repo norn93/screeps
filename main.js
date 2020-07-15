@@ -227,6 +227,6 @@ module.exports.loop = function () {
     // Check that all the link miners know which source they're supposed to be working on
     for (var i in linkminers) {
         var linkminer = linkminers[i];
-        linkminer.memory.source = null; // We want them to be tied to that first source
+        linkminer.memory.source = 0; // We want them to be tied to that first source
     }
 }
