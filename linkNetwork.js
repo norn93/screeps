@@ -20,9 +20,9 @@ function linkNetwork() {
         // If the link is not close to a source, then it must be a reciever.
         // Recievers don't really need to do anything
 
-        var distance_to_source = link.pos.findClosestByRange(FIND_SOURCES);
+        var closest_source = link.pos.findInRange(FIND_SOURCES);
 
-        console.log("Distance to source:", distance_to_source);
+        console.log("Distance to source:", closest_source);
     }
 }
 
