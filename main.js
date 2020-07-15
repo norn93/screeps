@@ -26,6 +26,7 @@ module.exports.loop = function () {
     var freights_setpoint = 1;
     var builders_setpoint = 5;
     var upgraders_setpoint = 7;
+    var linkminers_setpoint = 1;
 
     // Clear memory
     for (var name in Memory.creeps) {
