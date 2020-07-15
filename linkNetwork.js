@@ -26,6 +26,8 @@ function linkNetwork() {
 
         console.log("Closest:", closest_source);
         console.log("Null?:", closest_source == null);
+        console.log("No list?:", closest_source == []);
+        console.log("False:", closest_source == false);
 
         if (closest_source != null) {
             // Then we are a sender
