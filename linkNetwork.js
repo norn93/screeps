@@ -23,6 +23,8 @@ function linkNetwork() {
 
         var closest_source = link.pos.findInRange(FIND_SOURCES, 3);
 
+        console.log("Closest:", closest_source);
+
         if (closest_source) {
             // Then we are a sender
             // If we are full, transfer as many units as will fit into the reciever
