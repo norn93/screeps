@@ -24,12 +24,12 @@ function linkNetwork() {
 
         var closest_source = link.pos.findInRange(FIND_SOURCES, 3);
 
-        console.log("Closest:", closest_source);
-        console.log("Null?:", closest_source == null);
-        console.log("No list?:", closest_source == []);
-        console.log("False:", closest_source == false);
+        // console.log("Closest:", closest_source);
+        // console.log("Null?:", closest_source == null);
+        // console.log("No list?:", closest_source == []);
+        // console.log("False:", closest_source == false);
 
-        if (closest_source != null) {
+        if (closest_source) {
             // Then we are a sender
             // If we are full, transfer as many units as will fit into the reciever
             senders.push(link);
