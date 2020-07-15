@@ -7,13 +7,14 @@ var roleDefender = require('role.defender');
 var roleLinkMiner = require('role.linkMiner');
 
 var spawnCreep = require('spawnCreep');
+var linkNetwork = require('linkNetwork');
 
 module.exports.loop = function () {
     
     console.log("=======================TICK=======================");
 
-    console.log("TODO: Make link miner");
-    console.log("TODO: Change upgrader spawn limit and type when links are built");
+    console.log("TODO: Move energy between links");
+    console.log("TODO: Make link upgrader");
     console.log("TODO: Add more states to defenders");
     console.log("TODO: Add ability for defenders to move on ramparts only");
     console.log("TODO: Add healers");
@@ -149,10 +150,11 @@ module.exports.loop = function () {
         harvesters.length >= harvesters_setpoint &&
         defenders.length >= defenders_setpoint &&
         freights.length > 0) {
-        if (spawn_energy < 450) {
+        if (spawn_energy < (6*100 + 2*50 + 4*50)) {
             spawnCreep("linkminer", 2, 1, 1);
         } else {
             spawnCreep("linkminer", 2, 1, 1);
+            //spawnCreep("linkminer", 6, 2, 4);
         }
     }
 
