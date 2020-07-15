@@ -9,6 +9,7 @@ function linkNetwork() {
         }
     });
 
+    // Sort the links into types
     var senders = [];
     var receivers = []
     for (var i in links) {
@@ -24,6 +25,7 @@ function linkNetwork() {
         var closest_source = link.pos.findInRange(FIND_SOURCES, 3);
 
         console.log("Closest:", closest_source);
+        console.log("Null?:", closest_source == null);
 
         if (closest_source != null) {
             // Then we are a sender
