@@ -11,7 +11,7 @@ var roleLinkMiner = {
             creep.say("Emptying");
         }
         if (creep.memory.status != 0 && creep.store[RESOURCE_ENERGY] == 0) {
-            creem.memory.status = 0;
+            creep.memory.status = 0;
             creep.say("Mining");
         }
 
