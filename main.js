@@ -224,5 +224,10 @@ module.exports.loop = function () {
         );
     }
 
-    // Also, if we're bing attacked, spawn a defender
+    // Check that all the link miners know which source they're supposed to be working on
+    var sources = creep.room.find(FIND_SOURCES);
+    for (var i in linkminers) {
+        var linkminer = linkminers[i];
+        linkminer.memory.source = sources[0]; // We want them to be tied to that first source
+    }
 }
