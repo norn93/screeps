@@ -37,8 +37,8 @@ function linkNetwork() {
     for (var i in senders) {
         var sender = senders[i];
         console.log(sender, "should try to send to one of:");
-        for (var i in receivers) {
-            var receiver = receivers[i];
+        for (var j in receivers) {
+            var receiver = receivers[j];
             console.log(" -", reciever);
         }
     }
