@@ -5,6 +5,7 @@ var roleFreight = require('role.freight');
 var roleTower = require('role.tower');
 var roleDefender = require('role.defender');
 var roleLinkMiner = require('role.linkMiner');
+var roleLinkUpgrader = require('role.linkUpgrader');
 
 var spawnCreep = require('spawnCreep');
 var linkNetwork = require('linkNetwork');
@@ -30,6 +31,7 @@ module.exports.loop = function () {
     var builders_setpoint = 5;
     var upgraders_setpoint = 7;
     var linkminers_setpoint = 1;
+    var linkupgraders_setpoint = 1;
 
     // Clear memory
     for (var name in Memory.creeps) {
@@ -85,6 +87,9 @@ module.exports.loop = function () {
 
     var linkminers = _.filter(Game.creeps, (creep) => creep.memory.role == 'linkminer');
     console.log('Link miners: ' + linkminers.length);
+
+    var linkupgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'linkupgrader');
+    console.log('Link upgraders: ' + linkupgraders.length);
 
     // Get 1 harvester
     if (harvesters.length < harvesters_setpoint && freights.length == 0) {
@@ -156,6 +161,20 @@ module.exports.loop = function () {
             spawnCreep("linkminer", 2, 1, 1);
         } else {
             spawnCreep("linkminer", 2, 1, 1);
+            //spawnCreep("linkminer", 6, 2, 4);
+        }
+    }
+
+    // Then make a link upgrader
+    if (linkupgraders.length < linkupgraders_setpoint &&
+        builders.length >= builders_setpoint &&
+        harvesters.length >= harvesters_setpoint &&
+        defenders.length >= defenders_setpoint &&
+        freights.length > 0) {
+        if (spawn_energy < (6*100 + 2*50 + 4*50)) {
+            spawnCreep("linkupgrader", 2, 1, 1);
+        } else {
+            spawnCreep("linkupgrader", 2, 1, 1);
             //spawnCreep("linkminer", 6, 2, 4);
         }
     }
