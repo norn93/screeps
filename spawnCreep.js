@@ -1,6 +1,6 @@
 function spawnCreep(role, work=2, carry=1, move=1, attack=0, tough=0) {
     
-    var roles = ["builder", "harvester", "freight", "upgrader", "defender", "linkminer"];
+    var roles = ["builder", "harvester", "freight", "upgrader", "defender", "linkminer", "linkupgrader"];
     var valid_role = roles.includes(role);
     
     if (valid_role) {
@@ -27,6 +27,8 @@ function spawnCreep(role, work=2, carry=1, move=1, attack=0, tough=0) {
         if (result != 0) {
             console.log("Failed...");
         }
+    } else {
+        console.log("Invalid role:", role);
     }
 }
 
