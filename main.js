@@ -224,7 +224,7 @@ module.exports.loop = function () {
             roleLinkMiner.run(creep);
         }
         if(creep.memory.role == 'linkupgrader') {
-            roleUpgrader.run(creep);
+            roleLinkUpgrader.run(creep);
         }
     }
 
