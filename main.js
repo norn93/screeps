@@ -29,7 +29,7 @@ module.exports.loop = function () {
     var harvesters_setpoint = 4;
     var freights_setpoint = 1;
     var builders_setpoint = 5;
-    var upgraders_setpoint = 5;
+    var upgraders_setpoint = 0;
     var linkminers_setpoint = 1;
     var linkupgraders_setpoint = 1;
 
@@ -157,11 +157,10 @@ module.exports.loop = function () {
         harvesters.length >= harvesters_setpoint &&
         defenders.length >= defenders_setpoint &&
         freights.length > 0) {
-        if (spawn_energy < (6*100 + 2*50 + 4*50)) {
+        if (spawn_energy < (5*100 + 1*50 + 3*50)) {
             spawnCreep("linkminer", 2, 1, 1);
         } else {
-            spawnCreep("linkminer", 2, 1, 1);
-            //spawnCreep("linkminer", 6, 2, 4);
+            spawnCreep("linkminer", 5, 1, 3);
         }
     }
 
@@ -171,11 +170,10 @@ module.exports.loop = function () {
         harvesters.length >= harvesters_setpoint &&
         defenders.length >= defenders_setpoint &&
         freights.length > 0) {
-        if (spawn_energy < (6*100 + 2*50 + 4*50)) {
+        if (spawn_energy < (5*100 + 1*50 + 3*50)) {
             spawnCreep("linkupgrader", 2, 1, 1);
         } else {
-            spawnCreep("linkupgrader", 2, 1, 1);
-            //spawnCreep("linkminer", 6, 2, 4);
+            spawnCreep("linkupgrader", 5, 1, 3);
         }
     }
 
