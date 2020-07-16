@@ -14,8 +14,6 @@ module.exports.loop = function () {
     
     console.log("=======================TICK=======================");
 
-    console.log("TODO: Move energy between links");
-    console.log("TODO: Make link upgrader");
     console.log("TODO: Improve link miner efficiency");
     console.log("TODO: Try container mining");
     console.log("TODO: Add states to defenders");
@@ -31,7 +29,7 @@ module.exports.loop = function () {
     var builders_setpoint = 3;
     var upgraders_setpoint = 1;
     var linkminers_setpoint = 1;
-    var linkupgraders_setpoint = 1;
+    var linkupgraders_setpoint = 2;
 
     // Clear memory
     for (var name in Memory.creeps) {
