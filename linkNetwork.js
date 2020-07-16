@@ -19,7 +19,7 @@ function linkNetwork() {
         // If the link is close to a source, then it's job is to forward to the other link/s
         // that are not near sources i.e. the link is a sender.
 
-        // If the link is not close to a source, then it must be a reciever or a station
+        // If the link is not close to a source, then it must be a receiver or a station
         // Recievers don't really need to do anything, stations might have rules
 
         var closest_source = link.pos.findInRange(FIND_SOURCES, 3);
@@ -31,21 +31,26 @@ function linkNetwork() {
 
         if (closest_source != false) {
             // Then we are a sender
-            // If we are full, transfer as many units as will fit into the reciever
+            // If we are full, transfer as many units as will fit into the receiver
             senders.push(link);
         } else {
-            // We might be a reciever
+            // We might be a receiver
             receivers.push(link);
         }
     }
 
-    // Now, each sender should try to send to a reciever
+    // Now, each sender should try to send to a receiver if that receiver is empty
     for (var i in senders) {
         var sender = senders[i];
         console.log(sender, "should try to send to one of:");
         for (var j in receivers) {
             var receiver = receivers[j];
-            console.log(" -", receiver, "with", receiver.store.getFreeCapacity(RESOURCE_ENERGY), "space remaining.");
+            var energy = receiver.store.getCapacity(RESOURCE_ENERGY);
+            console.log(" -", receiver, "with", energy, "energy.");
+            if (energy == 0) {
+                var result = sender.transferEnergy(receiver);
+                console.log(result);
+            }
         }
     }
 }
