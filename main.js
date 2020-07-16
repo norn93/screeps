@@ -223,6 +223,9 @@ module.exports.loop = function () {
         if(creep.memory.role == 'linkminer') {
             roleLinkMiner.run(creep);
         }
+        if(creep.memory.role == 'linkupgrader') {
+            roleLinkMiner.run(creep);
+        }
     }
 
     // Get a list of towers in the room
