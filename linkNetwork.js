@@ -45,7 +45,7 @@ function linkNetwork() {
         console.log(sender, "should try to send to one of:");
         for (var j in receivers) {
             var receiver = receivers[j];
-            var energy = receiver.store.getCapacity(RESOURCE_ENERGY);
+            var energy = receiver.store.getUsedCapacity(RESOURCE_ENERGY);
             console.log(" -", receiver, "with", energy, "energy.");
             if (energy == 0) {
                 var result = sender.transferEnergy(receiver);
