@@ -60,7 +60,10 @@ var roleLinkMiner = {
 
         // DEBUG: Testing distance
         var ret = PathFinder.search(creep.pos, Game.spawns['Spawn1'].pos);
-        console.log(JSON.stringify(ret));
+        var path_distance = ret.cost;
+        const spawn_time = 27; // Measured
+        const total_spawn_lead_time = path_distance + spawn_time;
+        console.log("Need to spawn a new one", total_spawn_lead_time, "in advance.");
     }
 };
 
