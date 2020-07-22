@@ -61,7 +61,7 @@ var roleDefender = {
                     filter: (structure) => {
                         return (
                             structure.structureType == STRUCTURE_CONTAINER &&
-                            structure.store.getFreeCapacity() > 0
+                            structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0
                         );
                     }
                 });

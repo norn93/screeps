@@ -64,6 +64,14 @@ var roleLinkMiner = {
         const spawn_time = 27; // Measured
         const total_spawn_lead_time = path_distance + spawn_time;
         console.log("Need to spawn a new one", total_spawn_lead_time, "in advance.");
+
+        const current_ticks_to_live = creep.ticksToLive;
+
+        console.log("Currently,", current_ticks_to_live, "ticks to live.");
+
+        if (current_ticks_to_live <= total_spawn_lead_time) {
+            console.log("Need to spawn a new one!");
+        }
     }
 };
 
