@@ -42,7 +42,7 @@ var roleDefender = {
                 }
             }
         } else {
-            if (creep.ticksToLive > 200) {
+            if (creep.ticksToLive > 1000) {
                 // Go to a rampart; it still has some use
                 var rampart = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
