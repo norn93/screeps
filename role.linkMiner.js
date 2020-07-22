@@ -63,21 +63,21 @@ var roleLinkMiner = {
         var path_distance = ret.cost;
         const spawn_time = 27; // Measured
         const total_spawn_lead_time = path_distance + spawn_time;
-        console.log("Need to spawn a new one", total_spawn_lead_time, "in advance.");
+        // console.log("Need to spawn a new one", total_spawn_lead_time, "in advance.");
 
         const current_ticks_to_live = creep.ticksToLive;
 
-        console.log("Currently,", current_ticks_to_live, "ticks to live.");
+        // console.log("Currently,", current_ticks_to_live, "ticks to live.");
 
         if (creep.memory.replaced == null && current_ticks_to_live <= total_spawn_lead_time) {
-            console.log("Need to spawn a new one!");
+            // console.log("Need to spawn a new one!");
             const role = "linkminer";
             var name = role + Game.time;
             const parts = [WORK, WORK, WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE];
             const replaced = Game.spawns['Spawn1'].spawnCreep(parts, name, {memory: {role: role}});
             if (replaced == 0) {
                 creep.memory.replaced = true;
-                console.log("Success!");
+                // console.log("Success!");
             }
         }
     }
