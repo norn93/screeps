@@ -60,7 +60,7 @@ var roleLinkMiner = {
 
         // DEBUG: Testing distance
         var ret = PathFinder.search(creep.pos, Game.spawns['Spawn1'].pos);
-        console.log(json.stringify(ret));
+        console.log(JSON.stringify(ret));
     }
 };
 
