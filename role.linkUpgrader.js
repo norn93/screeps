@@ -17,6 +17,19 @@ var roleLinkUpgrader = {
 
         if (creep.memory.status == 0) {
             // Upgrading
+
+            // Withdraw if possible
+            creep.withdraw(link, RESOURCE_ENERGY);
+
+            // Grab from the nearest link, DO NOT move if needed
+            const link = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
+                filter: (structure) => {
+                    return (
+                        structure.structureType == STRUCTURE_LINK
+                    );
+                }
+            });
+
             // Go to the room controller, and upgrade it
             if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
