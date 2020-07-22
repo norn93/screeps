@@ -29,7 +29,7 @@ var roleLinkMiner = {
             }
         }
 
-        if (creep.memory.status == 1) {
+        if (creep.memory.status == 1 || creep.memory.status == 0) { // TODO: tidy this up
             // Emptying
             // Empty into the nearest link, move if needed
             const link = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
