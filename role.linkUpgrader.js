@@ -19,6 +19,13 @@ var roleLinkUpgrader = {
             // Upgrading
 
             // Withdraw if possible
+            const link = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
+                filter: (structure) => {
+                    return (
+                        structure.structureType == STRUCTURE_LINK
+                    );
+                }
+            });
             creep.withdraw(link, RESOURCE_ENERGY);
 
             // Grab from the nearest link, DO NOT move if needed
