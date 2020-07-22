@@ -62,10 +62,10 @@ var roleLinkMiner = {
         var ret = PathFinder.search(creep.pos, Game.spawns['Spawn1'].pos);
         var path_distance = ret.cost;
         const spawn_time = 27; // Measured
-        const total_spawn_lead_time = path_distance + spawn_time - 400;
+        const total_spawn_lead_time = path_distance + spawn_time;
         console.log("Need to spawn a new one", total_spawn_lead_time, "in advance.");
 
-        const current_ticks_to_live = creep.ticksToLive;
+        const current_ticks_to_live = creep.ticksToLive - 370;
 
         console.log("Currently,", current_ticks_to_live, "ticks to live.");
 
