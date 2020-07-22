@@ -14,7 +14,7 @@ module.exports.loop = function () {
     
     console.log("=======================TICK=======================");
 
-    console.log("TODO: Improve link miner efficiency");
+    console.log("TODO: Get link miners and upgraders to send spawn signals in advance");
     console.log("TODO: Try container mining");
     console.log("TODO: Add states to defenders");
     console.log("TODO: Add ability for defenders to move on ramparts only");

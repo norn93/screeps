@@ -57,6 +57,10 @@ var roleLinkMiner = {
                 creep.moveTo(link, {visualizePathStyle: {stroke: '#ffffff'}});
             }
         }
+
+        // DEBUG: Testing distance
+        var ret = PathFinder.search(creep.pos, Game.spawns['Spawn1'].pos);
+        console.log(json.stringify(ret));
     }
 };
 
