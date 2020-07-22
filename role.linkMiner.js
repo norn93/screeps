@@ -28,7 +28,7 @@ var roleLinkMiner = {
                 }
             }
             // Check for a nearby link
-            const link = creep.pos.findInRange(FIND_MY_STRUCTURES, 1, {
+            const link = creep.pos.findInRange(FIND_MY_STRUCTURES, 2, {
                 filter: (structure) => {
                     return (
                         structure.structureType == STRUCTURE_LINK
