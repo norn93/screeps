@@ -27,9 +27,22 @@ var roleLinkMiner = {
                     creep.moveTo(sources[creep.memory.source], {visualizePathStyle: {stroke: '#ffaa00'}});
                 }
             }
+            // Check for a nearby link
+            const link = creep.pos.findInRange(FIND_MY_STRUCTURES, 1, {
+                filter: (structure) => {
+                    return (
+                        structure.structureType == STRUCTURE_LINK
+                    );
+                }
+            });
+            if (link) {
+                if(creep.transfer(link, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(link, {visualizePathStyle: {stroke: '#ffffff'}});
+                }
+            }
         }
 
-        if (creep.memory.status == 1 || creep.memory.status == 0) { // TODO: tidy this up
+        if (creep.memory.status == 1) {
             // Emptying
             // Empty into the nearest link, move if needed
             const link = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
