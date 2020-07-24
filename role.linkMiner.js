@@ -58,6 +58,7 @@ var roleLinkMiner = {
             }
         }
 
+        // TODO: Tidy code
         // DEBUG: Testing distance
         var ret = PathFinder.search(creep.pos, Game.spawns['Spawn1'].pos);
         var path_distance = ret.cost;
