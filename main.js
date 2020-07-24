@@ -9,12 +9,12 @@ var roleLinkUpgrader = require('role.linkUpgrader');
 
 var spawnCreep = require('spawnCreep');
 var linkNetwork = require('linkNetwork');
+var claimRoom = require('claimRoom');
 
 module.exports.loop = function () {
     
     console.log(Game.time, "=======================TICK=======================");
 
-    console.log("TODO: Check for a 'large' force");
     console.log("TODO: Expand");
     console.log("TODO: Produce a battle report");
     console.log("TODO: Get link upgraders to send spawn signals in advance, like the miners");
@@ -269,4 +269,7 @@ module.exports.loop = function () {
 
     // Run link network
     linkNetwork();
+
+    // Run room claimer
+    claimRoom();
 }
