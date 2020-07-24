@@ -12,12 +12,14 @@ var linkNetwork = require('linkNetwork');
 
 module.exports.loop = function () {
     
-    console.log("=======================TICK=======================", Game.time);
+    console.log(Game.time, "=======================TICK=======================");
 
+    console.log("TODO: Check for a 'large' force");
+    console.log("TODO: Expand");
+    console.log("TODO: Produce a battle report");
     console.log("TODO: Get link upgraders to send spawn signals in advance, like the miners");
-    console.log("TODO: Add a miner");
+    console.log("TODO: Add a container miner for the main spwan");
     console.log("TODO: Make a spawning queue system that manages all the spawning");
-    console.log("TODO: Try container mining");
     console.log("TODO: Add states to defenders");
     console.log("TODO: Add ability for defenders to move on ramparts only");
     console.log("TODO: Add healers");
@@ -49,6 +51,16 @@ module.exports.loop = function () {
     } else {
         // We can't see hostiles, so we aren't being attacked
         Game.spawns['Spawn1'].memory.roomAttacked = false;
+        defenders_setpoint = 0;
+    }
+    // Get a list of hostile healers in the room
+    var hostile_healers = Game.spawns['Spawn1'].room.find(FIND_HOSTILE_CREEPS, {
+        filter: (creep) => {
+            return (creep.getActiveBodyparts(HEAL) != 0);
+        }
+    });
+    // If there are no healers, make no defenders
+    if (hostile_healers.length == 0) {
         defenders_setpoint = 0;
     }
 
