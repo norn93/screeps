@@ -48,6 +48,7 @@ module.exports.loop = function () {
     if (hostiles.length) {
         // If we can see hostiles, then we're being attacked
         Game.spawns['Spawn1'].memory.roomAttacked = true;
+        defenders_setpoint = hostiles.length; // Make as many defenders as there are attackers
     } else {
         // We can't see hostiles, so we aren't being attacked
         Game.spawns['Spawn1'].memory.roomAttacked = false;
