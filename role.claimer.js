@@ -8,7 +8,11 @@ var roleClaimer = {
         for (var i in flags) {
             var flag = flags[i];
 
-            if (creep.claimController(flag.room.controller) == ERR_NOT_IN_RANGE) {
+            if (flag.room) {
+                if (creep.claimController(flag.room.controller) == ERR_NOT_IN_RANGE) {
+                    creep.moveByPath(flag.memory.path_from_spawn);
+                }
+            } else {
                 creep.moveByPath(flag.memory.path_from_spawn);
             }
         }
