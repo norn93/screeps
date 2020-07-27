@@ -18,7 +18,7 @@ function claimRoom() {
         console.log("  - position:", flag.pos);
         console.log("  - room:", flag.room);
 
-        if (flag.name == "RESERVE") {
+        if (flag.name == "CLAIM") {
             console.log("  - We need to reserve this");
 
             claimer_setpoint += 1;
