@@ -19,6 +19,15 @@ function claimRoom() {
         console.log("  - room:", flag.room);
 
         if (flag.name == "CLAIM") {
+        
+            // Do we already have the room?
+            if (flag.room) {
+                if (flag.room.controller.my) {
+                    console.log("  - We already own this room");
+                    continue;
+                }
+            }
+
             console.log("  - We need to reserve this");
 
             claimer_setpoint += 1;
