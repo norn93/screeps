@@ -26,7 +26,7 @@ var roleBuilder = {
             var targets = []
             for (var i in Game.rooms) { // Search in all rooms, find any target
                 var this_room_targets = creep.room.find(FIND_CONSTRUCTION_SITES);
-                if (this_room_targets) {
+                if (this_room_targets.length) {
                     targets = this_room_targets;
                 }
             }
