@@ -15,7 +15,7 @@ var roleClaimer = {
                     creep.moveTo(flag);
                 }
             } else {
-                var result = creep.moveByPath(flag);
+                var result = creep.moveTo(flag);
                 console.log("Result of move:", result);
             }
         }
