@@ -151,9 +151,7 @@ module.exports.loop = function () {
     var targets = []
     for (var i in Game.rooms) { // Search in all rooms, find any target
         var room = Game.rooms[i];
-        console.log("Room:", room);
         var this_room_targets = room.find(FIND_CONSTRUCTION_SITES);
-        console.log("Targets:", this_room_targets);
         if (this_room_targets.length) {
             targets = this_room_targets;
         }
