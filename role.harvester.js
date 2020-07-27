@@ -10,7 +10,7 @@ var roleHarvester = {
                 creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         } else {
-            var freights = _.filter(Game.creeps, (creep) => creep.memory.role == 'freight' && creep.room == room);
+            var freights = _.filter(Game.creeps, (creep) => creep.memory.role == 'freight' && creep.room == spawn.room);
 
             if (freights.length) {
                 // If we have freights, then just fill up the storage
