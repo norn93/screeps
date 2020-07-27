@@ -87,7 +87,7 @@ function linkNetwork() {
             var energy = receiver.store.getUsedCapacity(RESOURCE_ENERGY);
             var energy_max = receiver.store.getCapacity(RESOURCE_ENERGY);
             console.log(" -", receiver, "with", energy, "out of", energy_max, "energy.");
-            if (energy < 0.5 * energy_max) {
+            if (energy < 0.25 * energy_max) {
                 transfer.transferEnergy(receiver);
             }
         }
