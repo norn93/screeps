@@ -59,7 +59,7 @@ function linkNetwork() {
             var energy = receiver.store.getUsedCapacity(RESOURCE_ENERGY);
             var energy_max = receiver.store.getCapacity(RESOURCE_ENERGY);
             console.log(" -", receiver, "with", energy, "out of", energy_max, "energy.");
-            if (energy < 0.5 * energy_max) {
+            if (energy < energy_max) {
                 sender.transferEnergy(receiver);
                 sent_to_receiver = true;
             }
@@ -79,9 +79,18 @@ function linkNetwork() {
     }
 
     // Each transfer whould try to also send to a reciever
-    // for (var i in transfers) {
-    //     console.log
-    // }
+    for (var i in transfers) {
+        var transfer = transfers[i];
+        for (var j in receivers) {
+            var receiver = receivers[j];
+            var energy = receiver.store.getUsedCapacity(RESOURCE_ENERGY);
+            var energy_max = receiver.store.getCapacity(RESOURCE_ENERGY);
+            console.log(" -", receiver, "with", energy, "out of", energy_max, "energy.");
+            if (energy < 0.5 * energy_max) {
+                transfer.transferEnergy(receiver);
+            }
+        }
+    }
 }
 
 module.exports = linkNetwork;
