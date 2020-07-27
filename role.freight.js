@@ -1,7 +1,7 @@
 var roleFreight = {
 
     /** @param {Creep} creep **/
-    run: function(creep) {
+    run: function(creep, spawn) {
 
         var total_stored_energy = 0;
         var storage = creep.room.find(FIND_STRUCTURES, {
@@ -46,7 +46,7 @@ var roleFreight = {
         } else {
             //Once full...
             //If we're being attacked, then focus on towers that are missing some energy
-            if (Game.spawns['Spawn1'].memory.roomAttacked) {
+            if (spawn.memory.roomAttacked) {
                 var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_TOWER) &&

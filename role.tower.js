@@ -1,12 +1,12 @@
 var roleTower = {
 
     /** @param {Creep} creep **/
-    run: function(tower) {
+    run: function(creep, spawn) {
 
-        if (Game.spawns['Spawn1'].memory.roomAttacked) {
+        if (spawn.memory.roomAttacked) {
 
             // Find the creep with the most healing parts
-            var hostiles = Game.spawns['Spawn1'].room.find(FIND_HOSTILE_CREEPS);
+            var hostiles = spawn.room.find(FIND_HOSTILE_CREEPS);
             var max_healing_parts = 0;
             var worst_hostile = hostiles[0];
             for(var i in hostiles) {
@@ -31,7 +31,7 @@ var roleTower = {
             // We're not being attacked
             
             // Find closest damaged non defensive structure
-            var structureToRepair = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES, {
+            var structureToRepair = spawn.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (
                         structure.hits < structure.hitsMax &&
@@ -43,10 +43,10 @@ var roleTower = {
 
             if (structureToRepair.length == 0) {
                 // Then we should repair a wall or rampart
-                var structureToRepair = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES, {
+                var structureToRepair = spawn.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (
-                            structure.hits < Game.spawns['Spawn1'].memory.wallHealth &&
+                            structure.hits < spawn.memory.wallHealth &&
                             (structure.structureType == STRUCTURE_WALL ||
                             structure.structureType == STRUCTURE_RAMPART)
                         );
@@ -57,7 +57,7 @@ var roleTower = {
                 // If it's reasonably full, then let's increase the wall limit by 1k
                 if (structureToRepair.length == 0) {
                     var total_storage = 0;
-                    var storages = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES, {
+                    var storages = spawn.room.find(FIND_STRUCTURES, {
                         filter: (structure) => {
                             return (structure.structureType == STRUCTURE_STORAGE)
                         }
@@ -67,8 +67,8 @@ var roleTower = {
                         total_storage += storage.store.getUsedCapacity();
                     }
                     if (total_storage > 250000) {
-                        Game.spawns['Spawn1'].memory.wallHealth += 1000;
-                        Game.spawns['Spawn1'].memory.wallHealth = Math.min(Game.spawns['Spawn1'].memory.wallHealth, 100000);
+                        spawn.memory.wallHealth += 1000;
+                        spawn.memory.wallHealth = Math.min(spawn.memory.wallHealth, 100000);
                     }
                 }
 

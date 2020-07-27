@@ -1,7 +1,7 @@
 var roleClaimer = {
 
     /** @param {Creep} creep **/
-    run: function(creep) {
+    run: function(creep, spawn) {
         
         var flags = Game.flags;
 

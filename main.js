@@ -28,10 +28,12 @@ module.exports.loop = function () {
     console.log("TODO: Automate testing code?");
 
     for (var r in Game.rooms) {
-        var this_room = Game.rooms[r];
+        var room = Game.rooms[r];
 
         // Get this room's spawn
-        var this_room_spawn = Game.spawns['Spawn1'];
+        const spawn = room.find(FIND_MY_STRUCTURES, {
+            filter: { structureType: STRUCTURE_SPAWN }
+        })[0];
 
         // Constants
         var defenders_setpoint = 3;
@@ -51,18 +53,18 @@ module.exports.loop = function () {
         }
         
         // Check if we're being attacked or not
-        var hostiles = this_room_spawn.room.find(FIND_HOSTILE_CREEPS);
+        var hostiles = spawn.room.find(FIND_HOSTILE_CREEPS);
         if (hostiles.length) {
             // If we can see hostiles, then we're being attacked
-            this_room_spawn.memory.roomAttacked = true;
+            spawn.memory.roomAttacked = true;
             defenders_setpoint = hostiles.length; // Make as many defenders as there are attackers
         } else {
             // We can't see hostiles, so we aren't being attacked
-            this_room_spawn.memory.roomAttacked = false;
+            spawn.memory.roomAttacked = false;
             defenders_setpoint = 0;
         }
         // Get a list of hostile healers in the room
-        var hostile_healers = this_room_spawn.room.find(FIND_HOSTILE_CREEPS, {
+        var hostile_healers = spawn.room.find(FIND_HOSTILE_CREEPS, {
             filter: (creep) => {
                 return (creep.getActiveBodyparts(HEAL) != 0);
             }
@@ -73,7 +75,7 @@ module.exports.loop = function () {
         }
 
         // Console prints
-        var rcl = this_room_spawn.room.controller.level;
+        var rcl = spawn.room.controller.level;
         console.log("RCL:", rcl);
         
         // Make pixels when we have spare CPU in our bucket
@@ -83,7 +85,7 @@ module.exports.loop = function () {
             console.log("Created a pixel!")
         }
         
-        var spawn_energy = this_room_spawn.room.energyAvailable;
+        var spawn_energy = spawn.room.energyAvailable;
         console.log("Energy:", spawn_energy);
         
         if (spawn_energy < 300) {
@@ -114,9 +116,9 @@ module.exports.loop = function () {
         // Get 1 harvester
         if (harvesters.length < harvesters_setpoint && freights.length == 0) {
             if (spawn_energy < 450) {
-                spawnCreep("harvester", 2, 1, 1);
+                spawnCreep(spawn, "harvester", 2, 1, 1);
             } else {
-                spawnCreep("harvester", 3, 1, 2);
+                spawnCreep(spawn, "harvester", 3, 1, 2);
             }
         }
         
@@ -124,9 +126,9 @@ module.exports.loop = function () {
         if (freights.length < 1 &&
             harvesters.length > 0) {
             if (spawn_energy < 450) {
-                spawnCreep("freight", 0, 4, 2);
+                spawnCreep(spawn, "freight", 0, 4, 2);
             } else {
-                spawnCreep("freight", 0, 6, 3);
+                spawnCreep(spawn, "freight", 0, 6, 3);
             }
         }
 
@@ -135,9 +137,9 @@ module.exports.loop = function () {
             freights.length > 0 &&
             harvesters.length > 0) {
             if (spawn_energy < (6 * 80 + 13 * 50 + 20 * 10)) {
-                spawnCreep("defender", 0, 0, 6, 2, 10);
+                spawnCreep(spawn, "defender", 0, 0, 6, 2, 10);
             } else {
-                spawnCreep("defender", 0, 0, 13, 6, 20);
+                spawnCreep(spawn, "defender", 0, 0, 13, 6, 20);
             }
         }
         
@@ -146,9 +148,9 @@ module.exports.loop = function () {
             defenders.length >= defenders_setpoint &&
             freights.length > 0) {
             if (spawn_energy < 450) {
-                spawnCreep("harvester", 2, 1, 1);
+                spawnCreep(spawn, "harvester", 2, 1, 1);
             } else {
-                spawnCreep("harvester", 3, 1, 2);
+                spawnCreep(spawn, "harvester", 3, 1, 2);
             }
         }
 
@@ -175,9 +177,9 @@ module.exports.loop = function () {
             defenders.length >= defenders_setpoint &&
             freights.length > 0) {
             if (spawn_energy < 1000) {
-                spawnCreep("builder", 2, 1, 1);
+                spawnCreep(spawn, "builder", 2, 1, 1);
             } else {
-                spawnCreep("builder", 5, 5, 5);
+                spawnCreep(spawn, "builder", 5, 5, 5);
             }
         }
 
@@ -189,9 +191,9 @@ module.exports.loop = function () {
             defenders.length >= defenders_setpoint &&
             freights.length > 0) {
             if (spawn_energy < (5*100 + 1*50 + 3*50)) {
-                spawnCreep("linkminer", 2, 1, 1);
+                spawnCreep(spawn, "linkminer", 2, 1, 1);
             } else {
-                spawnCreep("linkminer", 5, 1, 3);
+                spawnCreep(spawn, "linkminer", 5, 1, 3);
             }
         }
 
@@ -203,9 +205,9 @@ module.exports.loop = function () {
             defenders.length >= defenders_setpoint &&
             freights.length > 0) {
             if (spawn_energy < (5*100 + 1*50 + 3*50)) {
-                spawnCreep("linkupgrader", 2, 1, 1);
+                spawnCreep(spawn, "linkupgrader", 2, 1, 1);
             } else {
-                spawnCreep("linkupgrader", 5, 1, 3);
+                spawnCreep(spawn, "linkupgrader", 5, 1, 3);
             }
         }
 
@@ -216,19 +218,19 @@ module.exports.loop = function () {
             defenders.length >= defenders_setpoint &&
             freights.length > 0) {
             if (spawn_energy < 450) {
-                spawnCreep("upgrader", 2, 1, 1);
+                spawnCreep(spawn, "upgrader", 2, 1, 1);
             } else {
-                spawnCreep("upgrader", 3, 2, 3);
+                spawnCreep(spawn, "upgrader", 3, 2, 3);
             }
         }
         
         // Spawn that creep
-        if (this_room_spawn.spawning) { 
-            var spawningCreep = Game.creeps[this_room_spawn.spawning.name];
-            this_room_spawn.room.visual.text(
+        if (spawn.spawning) { 
+            var spawningCreep = Game.creeps[spawn.spawning.name];
+            spawn.room.visual.text(
                 '🛠️' + spawningCreep.memory.role,
-                this_room_spawn.pos.x + 1, 
-                this_room_spawn.pos.y, 
+                spawn.pos.x + 1, 
+                spawn.pos.y, 
                 {align: 'left', opacity: 0.8});
         }
 
@@ -236,33 +238,33 @@ module.exports.loop = function () {
         for (var name in Game.creeps) {
             var creep = Game.creeps[name];
             if(creep.memory.role == 'harvester') {
-                roleHarvester.run(creep);
+                roleHarvester.run(creep, spawn);
             }
             if(creep.memory.role == 'upgrader') {
-                roleUpgrader.run(creep);
+                roleUpgrader.run(creep, spawn);
             }
             if(creep.memory.role == 'builder') {
-                roleBuilder.run(creep);
+                roleBuilder.run(creep, spawn);
             }
             if(creep.memory.role == 'freight') {
-                roleFreight.run(creep);
+                roleFreight.run(creep, spawn);
             }
             if(creep.memory.role == 'defender') {
-                roleDefender.run(creep);
+                roleDefender.run(creep, spawn);
             }
             if(creep.memory.role == 'linkminer') {
-                roleLinkMiner.run(creep);
+                roleLinkMiner.run(creep, spawn);
             }
             if(creep.memory.role == 'linkupgrader') {
-                roleLinkUpgrader.run(creep);
+                roleLinkUpgrader.run(creep, spawn);
             }
             if(creep.memory.role == 'claimer') {
-                roleClaimer.run(creep);
+                roleClaimer.run(creep, spawn);
             }
         }
 
         // Get a list of towers in the room
-        var towers = this_room_spawn.room.find(FIND_STRUCTURES, {
+        var towers = spawn.room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == STRUCTURE_TOWER);
             }
@@ -275,7 +277,7 @@ module.exports.loop = function () {
         }
         
         // Send an email if we're bing attacked
-        if (this_room_spawn.memory.roomAttacked) {
+        if (spawn.memory.roomAttacked) {
             console.log("We are beng attacked!");
             Game.notify(
                 'We are being attacked in room' + Game.room + "!",
@@ -290,7 +292,7 @@ module.exports.loop = function () {
         }
 
         // Run link network
-        linkNetwork(this_room);
+        linkNetwork(room);
 
         // Run room claimer
         claimRoom();

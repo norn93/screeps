@@ -1,7 +1,7 @@
 var roleLinkUpgrader = {
 
     /** @param {Creep} creep **/
-    run: function(creep) {
+    run: function(creep, spawn) {
         // Calculate the upgrader state
         // States:
         // Upgrading (0)

@@ -1,14 +1,14 @@
 var roleDefender = {
 
     /** @param {Creep} creep **/
-    run: function(creep) {
+    run: function(creep, spawn) {
 
         // Choose creep state
-        if(creep.memory.defending && Game.spawns['Spawn1'].memory.roomAttacked == false) {
+        if(creep.memory.defending && spawn.memory.roomAttacked == false) {
             creep.memory.defending = false;
             creep.say("Peace");
         }
-        if(!creep.memory.defending && Game.spawns['Spawn1'].memory.roomAttacked == true) {
+        if(!creep.memory.defending && spawn.memory.roomAttacked == true) {
             creep.memory.defending = true;
             creep.say("Defending!");
         }
@@ -68,7 +68,7 @@ var roleDefender = {
                 if(creep.moveTo(container) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(container, {visualizePathStyle: {stroke: '#ffffff'}});
                 } else {
-                    Game.spawns['Spawn1'].recycleCreep(creep);
+                    spawn.recycleCreep(creep);
                 }
 
             }

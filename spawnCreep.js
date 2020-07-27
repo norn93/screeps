@@ -1,4 +1,4 @@
-function spawnCreep(role, work=2, carry=1, move=1, attack=0, tough=0, claim=0) {
+function spawnCreep(spawn, role, work=2, carry=1, move=1, attack=0, tough=0, claim=0) {
     
     var roles = ["builder", "harvester", "freight", "upgrader", "defender", "linkminer", "linkupgrader", "claimer"];
     var valid_role = roles.includes(role);
@@ -26,7 +26,7 @@ function spawnCreep(role, work=2, carry=1, move=1, attack=0, tough=0, claim=0) {
         
         var name = role + Game.time;
         console.log("Trying to spawn a new creep with role:", role);
-        var result = Game.spawns['Spawn1'].spawnCreep(parts, name, {memory: {role: role}});
+        var result = spawn.spawnCreep(parts, name, {memory: {role: role}});
         if (result != 0) {
             console.log("Failed...");
         }

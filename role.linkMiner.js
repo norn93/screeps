@@ -1,7 +1,7 @@
 var roleLinkMiner = {
 
     /** @param {Creep} creep **/
-    run: function(creep) {
+    run: function(creep, spawn) {
         // Calculate the miner state
         // States:
         // Mining (0)
@@ -60,7 +60,7 @@ var roleLinkMiner = {
 
         // TODO: Tidy code #CPU, maybe cache the path?
         // DEBUG: Testing distance
-        var ret = PathFinder.search(creep.pos, Game.spawns['Spawn1'].pos);
+        var ret = PathFinder.search(creep.pos, spawn.pos);
         var path_distance = ret.cost;
         const spawn_time = 27; // Measured
         const total_spawn_lead_time = path_distance + spawn_time;
@@ -75,7 +75,7 @@ var roleLinkMiner = {
             const role = "linkminer";
             var name = role + Game.time;
             const parts = [WORK, WORK, WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE];
-            const replaced = Game.spawns['Spawn1'].spawnCreep(parts, name, {memory: {role: role}});
+            const replaced = spawn.spawnCreep(parts, name, {memory: {role: role}});
             if (replaced == 0) {
                 creep.memory.replaced = true;
                 // console.log("Success!");
