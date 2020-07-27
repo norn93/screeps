@@ -160,10 +160,10 @@ module.exports.loop = function () {
         if (harvesters.length < harvesters_setpoint &&
             defenders.length >= defenders_setpoint &&
             freights.length >= freights_setpoint) {
-            if (spawn_energy < 450) {
+            if (spawn_energy < 4 * 100 + 2 * 50 + 4 * 50) {
                 spawnCreep(spawn, "harvester", 2, 1, 1);
             } else {
-                spawnCreep(spawn, "harvester", 3, 1, 2);
+                spawnCreep(spawn, "harvester", 4, 2, 4);
             }
         }
 
