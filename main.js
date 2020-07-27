@@ -54,6 +54,7 @@ module.exports.loop = function () {
 
         if (!storage) {
             freights_setpoint = 0;
+            console.log("No need for a freight in this room");
         }
 
         // Clear memory
