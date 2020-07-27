@@ -1,7 +1,7 @@
 var roleTower = {
 
     /** @param {Creep} creep **/
-    run: function(creep, spawn) {
+    run: function(tower, spawn) {
 
         if (spawn.memory.roomAttacked) {
 
