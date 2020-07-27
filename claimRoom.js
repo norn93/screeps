@@ -3,7 +3,7 @@ function claimRoom() {
 
     var flags = Game.flags;
 
-    const claimer_setpoint = 0;
+    var claimer_setpoint = 0;
 
     var claimers = _.filter(Game.creeps, (creep) => creep.memory.role == 'claimer');
     console.log('Claimers: ' + claimers.length);
