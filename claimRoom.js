@@ -16,6 +16,7 @@ function claimRoom() {
         console.log("Flag:", flag);
         console.log("  - name:", flag.name);
         console.log("  - position:", flag.pos);
+        console.log("  - room:", flag.room);
 
         if (flag.name == "RESERVE") {
             console.log("  - We need to reserve this");
@@ -24,7 +25,7 @@ function claimRoom() {
 
             // Cache the path from spawn to the flag #CPU
             if (!flag.memory.path_from_spawn) {
-                flag.memory.path_from_spawn = PathFinder.search(Game.spawns['Spawn1'].pos, flag.pos);
+                flag.memory.path_from_spawn = PathFinder.search(Game.spawns['Spawn1'].pos, flag.room.controller.pos);
             }
             
             var path_distance = flag.memory.path_from_spawn.cost;
