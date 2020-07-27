@@ -159,6 +159,8 @@ module.exports.loop = function () {
     if(targets.length == 0) {
         // We shouldn't build
         builders_setpoint = 0;
+    } else {
+        console.log("There is building to do");
     }
     
     // Then make a builder
