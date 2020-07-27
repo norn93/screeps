@@ -15,8 +15,12 @@ function claimRoom() {
         if (flag.name == "RESERVE") {
             console.log("  - We need to reserve this");
 
-            var ret = PathFinder.search(Game.spawns['Spawn1'].pos, flag.pos);
-            var path_distance = ret.cost;
+            // Cache the path from spawn to the flag #CPU
+            if (!flag.memory.path_from_spawn) {
+                flag.memory.path_from_spawn = PathFinder.search(Game.spawns['Spawn1'].pos, flag.pos);
+            }
+            
+            var path_distance = flag.memory.path_from_spawn.cost;
 
             console.log("  - distance:", path_distance);
         }

@@ -16,6 +16,7 @@ module.exports.loop = function () {
     console.log(Game.time, "=======================TICK=======================");
 
     console.log("TODO: Expand");
+    console.log("TODO: Send stored energy through link network to room controller");
     console.log("TODO: Produce a battle report");
     console.log("TODO: Get link upgraders to send spawn signals in advance, like the miners");
     console.log("TODO: Add a container miner for the main spwan");
