@@ -25,7 +25,7 @@ function linkNetwork() {
 
         var closest_source = link.pos.findInRange(FIND_SOURCES, 2);
 
-        var closest_storage = link.pos.findInRange(FIND_SOURCES, 2, {
+        var closest_storage = link.pos.findInRange(FIND_STRUCTURES, 2, {
             filter: (structure) => {
                 return (structure.structureType == STRUCTURE_STORAGE);
             }
