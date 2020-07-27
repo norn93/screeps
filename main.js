@@ -159,6 +159,7 @@ module.exports.loop = function () {
     if(targets.length == 0) {
         // We shouldn't build
         builders_setpoint = 0;
+        console.log("There is no building to do");
     } else {
         console.log("There is building to do");
     }
