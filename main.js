@@ -16,8 +16,7 @@ module.exports.loop = function () {
     
     console.log(Game.time, "=======================TICK=======================");
 
-    console.log("TODO: Expand");
-    console.log("TODO: Send stored energy through link network to room controller");
+    console.log("TODO: Expand, and consolidate");
     console.log("TODO: Produce a battle report");
     console.log("TODO: Get link upgraders to send spawn signals in advance, like the miners");
     console.log("TODO: Add a container miner for the main spwan");
@@ -35,7 +34,7 @@ module.exports.loop = function () {
     var builders_setpoint = 1;
     var upgraders_setpoint = 0;
     var linkminers_setpoint = 1;
-    var linkupgraders_setpoint = 4;
+    var linkupgraders_setpoint = 6;
 
     // Clear memory
     for (var name in Memory.creeps) {
