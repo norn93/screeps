@@ -22,7 +22,7 @@ function linkNetwork() {
         // If the link is not close to a source, then it must be a receiver or a station
         // Recievers don't really need to do anything, stations might have rules
 
-        var closest_source = link.pos.findInRange(FIND_SOURCES, 3);
+        var closest_source = link.pos.findInRange(FIND_SOURCES, 2);
 
         // console.log("Closest:", closest_source);
         // console.log("Null?:", closest_source == null);
