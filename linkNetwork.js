@@ -40,7 +40,7 @@ function linkNetwork() {
             // Then we are a sender
             // If we are full, transfer as many units as will fit into the receiver
             senders.push(link);
-        } else if (closest_storage) {
+        } else if (closest_storage != false) {
             transfers.push(link);
         } else {
             // We might be a receiver
