@@ -49,20 +49,31 @@ function linkNetwork() {
         }
     }
 
-    // Now, each sender should try to send to a receiver if that receiver is empty
+    // Now, each sender should try to send to a receiver if that receiver is less than half full
     for (var i in senders) {
         var sender = senders[i];
         console.log(sender, "should try to send to one of:");
+        var sent_to_receiver = false;
         for (var j in receivers) {
             var receiver = receivers[j];
             var energy = receiver.store.getUsedCapacity(RESOURCE_ENERGY);
             var energy_max = receiver.store.getCapacity(RESOURCE_ENERGY);
             console.log(" -", receiver, "with", energy, "out of", energy_max, "energy.");
-            if (energy < 0.1 * energy_max) {
-                var result = sender.transferEnergy(receiver, Math.max(energy_max - energy, sender.store.getUsedCapacity(RESOURCE_ENERGY)));
+            if (energy < 0.5 * energy_max) {
+                sender.transferEnergy(receiver);
+                sent_to_receiver = true;
             }
         }
+        // Else, we should send to a transfer
+        if (!sent_to_receiver) {
+
+        }
     }
+
+    // Each transfer whould try to also send to a reciever
+    // for (var i in transfers) {
+    //     console.log
+    // }
 }
 
 module.exports = linkNetwork;
