@@ -66,7 +66,15 @@ function linkNetwork() {
         }
         // Else, we should send to a transfer
         if (!sent_to_receiver) {
-
+            for (var j in transfers) {
+                var transfer = transfers[j];
+                var energy = transfer.store.getUsedCapacity(RESOURCE_ENERGY);
+                var energy_max = transfer.store.getCapacity(RESOURCE_ENERGY);
+                console.log(" -", transfer, "with", energy, "out of", energy_max, "energy.");
+                if (energy < 0.5 * energy_max) {
+                    sender.transferEnergy(transfer);
+                }
+            }
         }
     }
 
