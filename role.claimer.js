@@ -12,10 +12,10 @@ var roleClaimer = {
                 console.log("Flag has a room");
                 if (creep.claimController(flag.room.controller) == ERR_NOT_IN_RANGE) {
                     console.log("Moving toeards flag");
-                    creep.moveByPath(flag.memory.path_from_spawn);
+                    creep.moveByPath(flag.memory.path_from_spawn.path);
                 }
             } else {
-                var result = creep.moveByPath(flag.memory.path_from_spawn);
+                var result = creep.moveByPath(flag.memory.path_from_spawn.path);
                 console.log("Result of move:", result);
             }
         }
