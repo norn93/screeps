@@ -41,6 +41,7 @@ function linkNetwork() {
             // If we are full, transfer as many units as will fit into the receiver
             senders.push(link);
         } else if (closest_storage != false) {
+            // Then we are a transferer
             transfers.push(link);
         } else {
             // We might be a receiver
@@ -55,10 +56,10 @@ function linkNetwork() {
         for (var j in receivers) {
             var receiver = receivers[j];
             var energy = receiver.store.getUsedCapacity(RESOURCE_ENERGY);
-            console.log(" -", receiver, "with", energy, "energy.");
-            if (energy == 0) {
-                var result = sender.transferEnergy(receiver);
-                console.log(result);
+            var energy_max = receiver.store.getCapacity(RESOURCE_ENERGY);
+            console.log(" -", receiver, "with", energy, "out of", energy_max, "energy.");
+            if (energy < 0.1 * energy_max) {
+                var result = sender.transferEnergy(receiver, max(energy_max - energy, sender.store.getUsedCapacity(RESOURCE_ENERGY)));
             }
         }
     }
