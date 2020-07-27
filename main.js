@@ -94,25 +94,25 @@ module.exports.loop = function () {
             console.log("We are out of energy...");
         }
 
-        var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
+        var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.room == room);
         console.log('Harvesters: ' + harvesters.length);
         
-        var freights = _.filter(Game.creeps, (creep) => creep.memory.role == 'freight');
+        var freights = _.filter(Game.creeps, (creep) => creep.memory.role == 'freight' && creep.room == room);
         console.log('Freights: ' + freights.length);
         
-        var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
+        var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.room == room);
         console.log('Builders: ' + builders.length);
         
-        var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
+        var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.room == room);
         console.log('Upgraders: ' + upgraders.length);
 
-        var defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender');
+        var defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender' && creep.room == room);
         console.log('Defenders: ' + defenders.length);
 
-        var linkminers = _.filter(Game.creeps, (creep) => creep.memory.role == 'linkminer');
+        var linkminers = _.filter(Game.creeps, (creep) => creep.memory.role == 'linkminer' && creep.room == room);
         console.log('Link miners: ' + linkminers.length);
 
-        var linkupgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'linkupgrader');
+        var linkupgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'linkupgrader' && creep.room == room);
         console.log('Link upgraders: ' + linkupgraders.length);
 
         // Get 1 harvester
