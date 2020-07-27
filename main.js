@@ -48,7 +48,7 @@ module.exports.loop = function () {
         var harvesters_setpoint = 2;
         var freights_setpoint = 1;
         var builders_setpoint = 1;
-        var upgraders_setpoint = 8;
+        var upgraders_setpoint = 6;
         var linkminers_setpoint = 1;
         var linkupgraders_setpoint = 4;
 
