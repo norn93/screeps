@@ -153,6 +153,7 @@ module.exports.loop = function () {
         var room = Game.rooms[i];
         console.log("Room:", room);
         var this_room_targets = room.find(FIND_CONSTRUCTION_SITES);
+        console.log("Targets:", this_room_targets);
         if (this_room_targets) {
             targets = this_room_targets;
         }
