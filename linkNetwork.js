@@ -59,7 +59,7 @@ function linkNetwork() {
             var energy_max = receiver.store.getCapacity(RESOURCE_ENERGY);
             console.log(" -", receiver, "with", energy, "out of", energy_max, "energy.");
             if (energy < 0.1 * energy_max) {
-                var result = sender.transferEnergy(receiver, max(energy_max - energy, sender.store.getUsedCapacity(RESOURCE_ENERGY)));
+                var result = sender.transferEnergy(receiver, Math.max(energy_max - energy, sender.store.getUsedCapacity(RESOURCE_ENERGY)));
             }
         }
     }
