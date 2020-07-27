@@ -39,7 +39,7 @@ module.exports.loop = function () {
 
         // Constants
         var defenders_setpoint = 3;
-        var harvesters_setpoint = 4;
+        var harvesters_setpoint = 2;
         var freights_setpoint = 1;
         var builders_setpoint = 1;
         var upgraders_setpoint = 0;
@@ -117,10 +117,10 @@ module.exports.loop = function () {
 
         // Get 1 harvester
         if (harvesters.length < harvesters_setpoint && freights.length == 0) {
-            if (spawn_energy < 450) {
+            if (spawn_energy < 4 * 100 + 2 * 50 + 4 * 50) {
                 spawnCreep(spawn, "harvester", 2, 1, 1);
             } else {
-                spawnCreep(spawn, "harvester", 3, 1, 2);
+                spawnCreep(spawn, "harvester", 4, 2, 4);
             }
         }
         
