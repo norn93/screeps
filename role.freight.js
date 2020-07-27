@@ -2,13 +2,23 @@ var roleFreight = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        
+
+        var total_stored_energy = 0;
+        var storage = creep.room.find(FIND_STRUCTURES, {
+            filter: (structure) => {
+                return (structure.structureType == STRUCTURE_STORAGE);
+            }
+        });
+        if (storage.length) {
+            total_stored_energy = storage[0].store.getUsedCapacity(RESOURCE_ENERGY);
+        }
+    
         // If we're about to die, then drop everythig into the storage and suicide
         if(creep.ticksToLive < 25) {
             var targets = creep.room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_STORAGE);
-                    }
+                filter: (structure) => {
+                    return (structure.structureType == STRUCTURE_STORAGE);
+                }
             });
             if(targets.length) {
                 if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
@@ -64,8 +74,8 @@ var roleFreight = {
                             structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                     }
                 });
-                // ...then links
-                if (targets.length == 0) {
+                // ...then links (if we have a good amount of energy)
+                if (targets.length == 0 && total_stored_energy > 500000) {
                     targets = creep.pos.findInRange(FIND_STRUCTURES, 10, {
                         filter: (structure) => {
                             return (
