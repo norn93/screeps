@@ -66,7 +66,7 @@ var roleFreight = {
                 });
                 // ...then links
                 if (targets.length == 0) {
-                    targets = creep.room.findInRange(FIND_STRUCTURES, 10, {
+                    targets = creep.findInRange(FIND_STRUCTURES, 10, {
                         filter: (structure) => {
                             return (
                                 structure.structureType == STRUCTURE_LINK) &&
