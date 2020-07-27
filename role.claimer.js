@@ -13,7 +13,8 @@ var roleClaimer = {
                     creep.moveByPath(flag.memory.path_from_spawn);
                 }
             } else {
-                creep.moveByPath(flag.memory.path_from_spawn);
+                var result = creep.moveByPath(flag.memory.path_from_spawn);
+                console.log("Result of move:", result);
             }
         }
     }
