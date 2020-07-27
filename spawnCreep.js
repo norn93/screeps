@@ -1,6 +1,6 @@
 function spawnCreep(role, work=2, carry=1, move=1, attack=0, tough=0) {
     
-    var roles = ["builder", "harvester", "freight", "upgrader", "defender", "linkminer", "linkupgrader"];
+    var roles = ["builder", "harvester", "freight", "upgrader", "defender", "linkminer", "linkupgrader", "claimer"];
     var valid_role = roles.includes(role);
     
     if (valid_role) {

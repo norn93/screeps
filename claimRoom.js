@@ -3,7 +3,10 @@ function claimRoom() {
 
     var flags = Game.flags;
 
-    const claimer_setpoint = 1;
+    const claimer_setpoint = 0;
+
+    var claimers = _.filter(Game.creeps, (creep) => creep.memory.role == 'claimer');
+    console.log('Claimers: ' + claimers.length);
 
     for (var i in flags) {
         var flag = flags[i];
@@ -15,6 +18,8 @@ function claimRoom() {
         if (flag.name == "RESERVE") {
             console.log("  - We need to reserve this");
 
+            claimer_setpoint += 1;
+
             // Cache the path from spawn to the flag #CPU
             if (!flag.memory.path_from_spawn) {
                 flag.memory.path_from_spawn = PathFinder.search(Game.spawns['Spawn1'].pos, flag.pos);
@@ -24,6 +29,10 @@ function claimRoom() {
 
             console.log("  - distance:", path_distance);
         }
+    }
+
+    if (claimers.length < claimer_setpoint) {
+        spawnCreep("claimer", 0, 0, 1);
     }
 }
 
