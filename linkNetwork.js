@@ -81,6 +81,7 @@ function linkNetwork() {
     // Each transfer whould try to also send to a reciever
     for (var i in transfers) {
         var transfer = transfers[i];
+        console.log(transfer, "should try to send to one of:");
         for (var j in receivers) {
             var receiver = receivers[j];
             var energy = receiver.store.getUsedCapacity(RESOURCE_ENERGY);
