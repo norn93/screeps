@@ -12,6 +12,7 @@ function linkNetwork() {
     // Sort the links into types
     var senders = [];
     var receivers = []
+    var transfers = []
     for (var i in links) {
         var link = links[i];
 
@@ -24,6 +25,12 @@ function linkNetwork() {
 
         var closest_source = link.pos.findInRange(FIND_SOURCES, 2);
 
+        var closest_storage = link.pos.findInRange(FIND_SOURCES, 2, {
+            filter: (structure) => {
+                return (structure.structureType == STRUCTURE_STORAGE);
+            }
+        });
+
         // console.log("Closest:", closest_source);
         // console.log("Null?:", closest_source == null);
         // console.log("No list?:", closest_source == []);
@@ -33,6 +40,8 @@ function linkNetwork() {
             // Then we are a sender
             // If we are full, transfer as many units as will fit into the receiver
             senders.push(link);
+        } else if (closest_storage) {
+            transfers.push(link);
         } else {
             // We might be a receiver
             receivers.push(link);
