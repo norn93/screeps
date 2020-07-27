@@ -37,14 +37,24 @@ module.exports.loop = function () {
             filter: { structureType: STRUCTURE_SPAWN }
         })[0];
 
+        // Get this room's storage
+        const storage = room.find(FIND_MY_STRUCTURES, {
+            filter: { structureType: STRUCTURE_STORAGE }
+        })[0];
+
         // Constants
         var defenders_setpoint = 3;
+        var freights_setpoint = 1;
         var harvesters_setpoint = 2;
         var freights_setpoint = 1;
         var builders_setpoint = 1;
         var upgraders_setpoint = 0;
         var linkminers_setpoint = 1;
         var linkupgraders_setpoint = 4;
+
+        if (!storage) {
+            freights_setpoint = 0;
+        }
 
         // Clear memory
         for (var name in Memory.creeps) {
@@ -125,7 +135,7 @@ module.exports.loop = function () {
         }
         
         // Then 1 freight
-        if (freights.length < 1 &&
+        if (freights.length < freights_setpoint &&
             harvesters.length > 0) {
             if (spawn_energy < 450) {
                 spawnCreep(spawn, "freight", 0, 4, 2);
@@ -136,7 +146,7 @@ module.exports.loop = function () {
 
         // Then defenders
         if (defenders.length < defenders_setpoint &&
-            freights.length > 0 &&
+            freights.length >= freights_setpoint &&
             harvesters.length > 0) {
             if (spawn_energy < (6 * 80 + 13 * 50 + 20 * 10)) {
                 spawnCreep(spawn, "defender", 0, 0, 6, 2, 10);
@@ -148,7 +158,7 @@ module.exports.loop = function () {
         // Then top up harvesters
         if (harvesters.length < harvesters_setpoint &&
             defenders.length >= defenders_setpoint &&
-            freights.length > 0) {
+            freights.length >= freights_setpoint) {
             if (spawn_energy < 450) {
                 spawnCreep(spawn, "harvester", 2, 1, 1);
             } else {
@@ -177,7 +187,7 @@ module.exports.loop = function () {
         if (builders.length < builders_setpoint &&
             harvesters.length >= harvesters_setpoint &&
             defenders.length >= defenders_setpoint &&
-            freights.length > 0) {
+            freights.length >= freights_setpoint) {
             if (spawn_energy < 1000) {
                 spawnCreep(spawn, "builder", 2, 1, 1);
             } else {
@@ -191,7 +201,7 @@ module.exports.loop = function () {
             builders.length >= builders_setpoint &&
             harvesters.length >= harvesters_setpoint &&
             defenders.length >= defenders_setpoint &&
-            freights.length > 0) {
+            freights.length >= freights_setpoint) {
             if (spawn_energy < (5*100 + 1*50 + 3*50)) {
                 spawnCreep(spawn, "linkminer", 2, 1, 1);
             } else {
@@ -205,7 +215,7 @@ module.exports.loop = function () {
             builders.length >= builders_setpoint &&
             harvesters.length >= harvesters_setpoint &&
             defenders.length >= defenders_setpoint &&
-            freights.length > 0) {
+            freights.length >= freights_setpoint) {
             if (spawn_energy < (5*100 + 1*50 + 3*50)) {
                 spawnCreep(spawn, "linkupgrader", 2, 1, 1);
             } else {
@@ -218,7 +228,7 @@ module.exports.loop = function () {
             builders.length >= builders_setpoint &&
             harvesters.length >= harvesters_setpoint &&
             defenders.length >= defenders_setpoint &&
-            freights.length > 0) {
+            freights.length >= freights_setpoint) {
             if (spawn_energy < 450) {
                 spawnCreep(spawn, "upgrader", 2, 1, 1);
             } else {
