@@ -1,7 +1,7 @@
-function linkNetwork() {
+function linkNetwork(this_room) {
     console.log("Running link network...");
 
-    var links = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES, {
+    var links = this_room.find(FIND_STRUCTURES, {
         filter: (structure) => {
             return (
                 structure.structureType == STRUCTURE_LINK
