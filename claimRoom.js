@@ -35,7 +35,7 @@ function claimRoom() {
     }
 
     if (claimers.length < claimer_setpoint) {
-        spawnCreep("claimer", 0, 0, 1);
+        spawnCreep("claimer", 0, 0, 2, 0, 0, 1);
     }
 }
 

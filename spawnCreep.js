@@ -1,4 +1,4 @@
-function spawnCreep(role, work=2, carry=1, move=1, attack=0, tough=0) {
+function spawnCreep(role, work=2, carry=1, move=1, attack=0, tough=0, claim=0) {
     
     var roles = ["builder", "harvester", "freight", "upgrader", "defender", "linkminer", "linkupgrader", "claimer"];
     var valid_role = roles.includes(role);
@@ -19,6 +19,9 @@ function spawnCreep(role, work=2, carry=1, move=1, attack=0, tough=0) {
         }
         for (var i = 0; i < attack; i++) {
             parts.push(ATTACK)
+        }
+        for (var i = 0; i < claim; i++) {
+            parts.push(CLAIM)
         }
         
         var name = role + Game.time;
