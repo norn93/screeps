@@ -30,6 +30,8 @@ module.exports.loop = function () {
     for (var r in Game.rooms) {
         var room = Game.rooms[r];
 
+        console.log("Running room:", room);
+
         // Get this room's spawn
         const spawn = room.find(FIND_MY_STRUCTURES, {
             filter: { structureType: STRUCTURE_SPAWN }
@@ -273,7 +275,7 @@ module.exports.loop = function () {
         // For each tower
         for (var i in towers) {
             var tower = towers[i];
-            roleTower.run(tower);
+            roleTower.run(spawn, tower);
         }
         
         // Send an email if we're bing attacked
