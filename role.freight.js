@@ -45,7 +45,7 @@ var roleFreight = {
                 });
                 if (targets.length == 0) {
                     // Then we can afford to work on those extensions
-                    var targets = creep.room.find(FIND_STRUCTURES, {
+                    targets = creep.room.find(FIND_STRUCTURES, {
                         filter: (structure) => {
                             return (
                                 structure.structureType == STRUCTURE_EXTENSION ||
@@ -64,9 +64,19 @@ var roleFreight = {
                             structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                     }
                 });
+                // ...then links
+                if (targets.length == 0) {
+                    targets = creep.room.findInRange(FIND_STRUCTURES, 10, {
+                        filter: (structure) => {
+                            return (
+                                structure.structureType == STRUCTURE_LINK) &&
+                                structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                        }
+                    });
+                }
                 // ...and if they're all full, THEN fill up towers
                 if (targets.length == 0) {
-                    var targets = creep.room.find(FIND_STRUCTURES, {
+                    targets = creep.room.find(FIND_STRUCTURES, {
                         filter: (structure) => {
                             return (
                                 structure.structureType == STRUCTURE_TOWER) &&
