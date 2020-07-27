@@ -25,12 +25,12 @@ function claimRoom() {
 
             // Cache the path from spawn to the flag #CPU
             if (!flag.memory.path_from_spawn) {
-                flag.memory.path_from_spawn = PathFinder.search(Game.spawns['Spawn1'].pos, flag.pos);
+                flag.memory.path_from_spawn = PathFinder.search(Game.spawns['Spawn1'].pos, flag.pos).path;
             }
             
-            var path_distance = flag.memory.path_from_spawn.cost;
+            // var path_distance = flag.memory.path_from_spawn.cost;
 
-            console.log("  - distance:", path_distance);
+            // console.log("  - distance:", path_distance);
         }
     }
 
