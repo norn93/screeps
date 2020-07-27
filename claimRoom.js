@@ -1,3 +1,5 @@
+var spawnCreep = require('spawnCreep');
+
 function claimRoom() {
     console.log("Running room claimer...");
 
