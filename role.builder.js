@@ -23,7 +23,13 @@ var roleBuilder = {
         }
 
         if(creep.memory.building) {
-            var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+            var targets = []
+            for (var i in Game.rooms) { // Search in all rooms, find any target
+                var this_room_targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+                if (this_room_targets) {
+                    targets = this_room_targets;
+                }
+            }
             if(targets.length) {
                 // We should build
                 if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {

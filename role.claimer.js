@@ -13,6 +13,8 @@ var roleClaimer = {
                 if (creep.claimController(flag.room.controller) == ERR_NOT_IN_RANGE) {
                     console.log("Moving towards flag");
                     creep.moveTo(flag);
+                } else {
+                    console.log("Some weird error: maybe this creep can't claim?");
                 }
             } else {
                 var result = creep.moveTo(flag);

@@ -148,7 +148,13 @@ module.exports.loop = function () {
     }
 
     // Check if there's any building to do
-    var targets = Game.spawns['Spawn1'].room.find(FIND_CONSTRUCTION_SITES);
+    var targets = []
+    for (var i in Game.rooms) { // Search in all rooms, find any target
+        var this_room_targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+        if (this_room_targets) {
+            targets = this_room_targets;
+        }
+    }
     if(targets.length == 0) {
         // We shouldn't build
         builders_setpoint = 0;
