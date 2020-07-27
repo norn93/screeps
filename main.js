@@ -275,7 +275,7 @@ module.exports.loop = function () {
         // For each tower
         for (var i in towers) {
             var tower = towers[i];
-            roleTower.run(spawn, tower);
+            roleTower.run(tower, spawn);
         }
         
         // Send an email if we're bing attacked
