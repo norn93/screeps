@@ -48,7 +48,7 @@ module.exports.loop = function () {
         var harvesters_setpoint = 2;
         var freights_setpoint = 1;
         var builders_setpoint = 1;
-        var upgraders_setpoint = 0;
+        var upgraders_setpoint = 4;
         var linkminers_setpoint = 1;
         var linkupgraders_setpoint = 4;
 
@@ -225,7 +225,8 @@ module.exports.loop = function () {
         }
 
         // Then make a few upgraders
-        if (upgraders.length < upgraders_setpoint &&
+        if (rcl <= 5 &&
+            upgraders.length < upgraders_setpoint &&
             builders.length >= builders_setpoint &&
             harvesters.length >= harvesters_setpoint &&
             defenders.length >= defenders_setpoint &&
