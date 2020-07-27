@@ -177,7 +177,8 @@ module.exports.loop = function () {
     }
 
     // Then make a link miner
-    if (linkminers.length < linkminers_setpoint &&
+    if (rcl >= 5 &&
+        linkminers.length < linkminers_setpoint &&
         builders.length >= builders_setpoint &&
         harvesters.length >= harvesters_setpoint &&
         defenders.length >= defenders_setpoint &&
@@ -190,7 +191,8 @@ module.exports.loop = function () {
     }
 
     // Then make a link upgrader
-    if (linkupgraders.length < linkupgraders_setpoint &&
+    if (rcl >= 5 &&
+        linkupgraders.length < linkupgraders_setpoint &&
         builders.length >= builders_setpoint &&
         harvesters.length >= harvesters_setpoint &&
         defenders.length >= defenders_setpoint &&
@@ -271,7 +273,7 @@ module.exports.loop = function () {
     if (Game.spawns['Spawn1'].memory.roomAttacked) {
         console.log("We are beng attacked!");
         Game.notify(
-            'We are being attacked!',
+            'We are being attacked in room' + Game.room + "!",
             5  // group these notifications for 5 minutes
         );
     }
