@@ -49,6 +49,7 @@ module.exports.loop = function () {
     if (Game.cpu.bucket > 9000) {
         Game.cpu.generatePixel();
         console.log("Created a pixel!")
+        cpu_lpf = Game.cpu.bucket - 5000; // Try to reset correctly
     }
 
     for (var r in Game.rooms) {
