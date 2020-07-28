@@ -38,6 +38,13 @@ module.exports.loop = function () {
     // Make pixels when we have spare CPU in our bucket
     var new_cpu_lpf = cpu_lpf * (1 - cpu_lpf_alpha) + Game.cpu.bucket * cpu_lpf_alpha;
     console.log("Averaged CPU:", new_cpu_lpf);
+    if (new_cpu_lpf < cpu_lpf) {
+        console.log("We are running out of CPU!");
+        Game.notify(
+            "We are running out of CPU!",
+            5  // group these notifications for 5 minutes
+        );
+    }
     cpu_lpf = new_cpu_lpf;
     if (Game.cpu.bucket > 9000) {
         Game.cpu.generatePixel();
@@ -296,17 +303,17 @@ module.exports.loop = function () {
         
         // Send an email if we're being attacked by a big force
         if (spawn.memory.roomAttacked && defenders_setpoint != 0) {
-            console.log('We are being attacked by a large force in room ' + room + "!");
+            console.log('We are being attacked by a large force in ' + room + "!");
             Game.notify(
-                'We are being attacked by a large force in room ' + room + "!",
+                'We are being attacked by a large force in ' + room + "!",
                 5  // group these notifications for 5 minutes
             );
         }
         // Send an email if we're being attacked by a small force
         if (spawn.memory.roomAttacked && defenders_setpoint == 0) {
-            console.log("We are being attacked by a small force in room " + room + "...");
+            console.log("We are being attacked by a small force in " + room + "...");
             Game.notify(
-                "We are being attacked by a small force in room " + room + "...",
+                "We are being attacked by a small force in " + room + "...",
                 5  // group these notifications for 5 minutes
             );
         }
