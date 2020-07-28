@@ -1,5 +1,9 @@
+const LOG = false;
+
 function linkNetwork(this_room) {
-    console.log("Running link network...");
+    if (LOG) {
+        console.log("Running link network...");
+    }
 
     var links = this_room.find(FIND_STRUCTURES, {
         filter: (structure) => {
@@ -52,13 +56,17 @@ function linkNetwork(this_room) {
     // Now, each sender should try to send to a receiver if that receiver is less than half full
     for (var i in senders) {
         var sender = senders[i];
-        console.log(sender, "should try to send to one of:");
+        if (LOG) {
+            console.log(sender, "should try to send to one of:");
+        }
         var sent_to_receiver = false;
         for (var j in receivers) {
             var receiver = receivers[j];
             var energy = receiver.store.getUsedCapacity(RESOURCE_ENERGY);
             var energy_max = receiver.store.getCapacity(RESOURCE_ENERGY);
-            console.log(" -", receiver, "with", energy, "out of", energy_max, "energy.");
+            if (LOG) {
+                console.log(" -", receiver, "with", energy, "out of", energy_max, "energy.");
+            }
             if (energy < energy_max) {
                 sender.transferEnergy(receiver);
                 sent_to_receiver = true;
@@ -70,7 +78,9 @@ function linkNetwork(this_room) {
                 var transfer = transfers[j];
                 var energy = transfer.store.getUsedCapacity(RESOURCE_ENERGY);
                 var energy_max = transfer.store.getCapacity(RESOURCE_ENERGY);
-                console.log(" -", transfer, "with", energy, "out of", energy_max, "energy.");
+                if (LOG) {
+                    console.log(" -", transfer, "with", energy, "out of", energy_max, "energy.");
+                }
                 if (energy < 0.5 * energy_max) {
                     sender.transferEnergy(transfer);
                 }
@@ -81,12 +91,16 @@ function linkNetwork(this_room) {
     // Each transfer whould try to also send to a reciever
     for (var i in transfers) {
         var transfer = transfers[i];
-        console.log(transfer, "should try to send to one of:");
+        if (LOG) {
+            console.log(transfer, "should try to send to one of:");
+        }
         for (var j in receivers) {
             var receiver = receivers[j];
             var energy = receiver.store.getUsedCapacity(RESOURCE_ENERGY);
             var energy_max = receiver.store.getCapacity(RESOURCE_ENERGY);
-            console.log(" -", receiver, "with", energy, "out of", energy_max, "energy.");
+            if (LOG) {
+                console.log(" -", receiver, "with", energy, "out of", energy_max, "energy.");
+            }
             if (energy < 0.25 * energy_max) {
                 transfer.transferEnergy(receiver);
             }

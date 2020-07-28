@@ -1,3 +1,5 @@
+const LOG = false;
+
 function spawnCreep(spawn, role, work=2, carry=1, move=1, attack=0, tough=0, claim=0) {
     
     var roles = ["builder", "harvester", "freight", "upgrader", "defender", "linkminer", "linkupgrader", "claimer"];
@@ -25,13 +27,19 @@ function spawnCreep(spawn, role, work=2, carry=1, move=1, attack=0, tough=0, cla
         }
         
         var name = role + Game.time;
-        console.log("Trying to spawn a new creep with role:", role);
+        if (LOG) {
+            console.log("Trying to spawn a new creep with role:", role);
+        }
         var result = spawn.spawnCreep(parts, name, {memory: {role: role}});
         if (result != 0) {
-            console.log("Failed...");
+            if (LOG) {
+                console.log("Failed...");
+            }
         }
     } else {
-        console.log("Invalid role:", role);
+        if (LOG) {
+            console.log("Invalid role:", role);
+        }
     }
 }
 

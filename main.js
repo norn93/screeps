@@ -12,20 +12,25 @@ var spawnCreep = require('spawnCreep');
 var linkNetwork = require('linkNetwork');
 var claimRoom = require('claimRoom');
 
+const LOG_TODO = false;
+const LOG_DIAGNOSTICS = false;
+
 module.exports.loop = function () {
     
     console.log(Game.time, "=======================TICK=======================");
 
-    console.log("TODO: Toggle the console logs with flags");
-    console.log("TODO: Produce a battle report");
-    console.log("TODO: Get link upgraders to send spawn signals in advance, like the miners");
-    console.log("TODO: Add a container miner for the main spwan");
-    console.log("TODO: Make a spawning queue system that manages all the spawning");
-    console.log("TODO: Add states to defenders");
-    console.log("TODO: Add ability for defenders to move on ramparts only");
-    console.log("TODO: Add healers");
-    console.log("TODO: Add wall repairers");
-    console.log("TODO: Automate testing code?");
+    if (LOG_TODO) {
+        console.log("TODO: Toggle the console logs with flags");
+        console.log("TODO: Produce a battle report");
+        console.log("TODO: Get link upgraders to send spawn signals in advance, like the miners");
+        console.log("TODO: Add a container miner for the main spwan");
+        console.log("TODO: Make a spawning queue system that manages all the spawning");
+        console.log("TODO: Add states to defenders");
+        console.log("TODO: Add ability for defenders to move on ramparts only");
+        console.log("TODO: Add healers");
+        console.log("TODO: Add wall repairers");
+        console.log("TODO: Automate testing code?");
+    }
 
     for (var r in Game.rooms) {
         var room = Game.rooms[r];
@@ -52,16 +57,11 @@ module.exports.loop = function () {
         var linkminers_setpoint = 1;
         var linkupgraders_setpoint = 4;
 
-        if (!storage) {
-            freights_setpoint = 0;
-            console.log("No need for a freight in this room");
-        }
-
         // Clear memory
         for (var name in Memory.creeps) {
             if(!Game.creeps[name]) {
                 delete Memory.creeps[name];
-                console.log('Clearing non-existing creep memory:', name);
+                // console.log('Clearing non-existing creep memory:', name);
             }
         }
         
@@ -86,45 +86,46 @@ module.exports.loop = function () {
         if (hostile_healers.length == 0) {
             defenders_setpoint = 0;
         }
+        // Check if we need a freight in this room
+        if (!storage) {
+            freights_setpoint = 0;
+        }
 
-        // Console prints
+        // Check the room controller level
         var rcl = spawn.room.controller.level;
-        console.log("RCL:", rcl);
         
         // Make pixels when we have spare CPU in our bucket
-        console.log("CPU in bucket:", Game.cpu.bucket);
         if (Game.cpu.bucket > 9000) {
             Game.cpu.generatePixel();
             console.log("Created a pixel!")
         }
         
+        // Check how much spawning energywe have
         var spawn_energy = spawn.room.energyAvailable;
-        console.log("Energy:", spawn_energy);
-        
-        if (spawn_energy < 300) {
-            console.log("We are out of energy...");
-        }
 
+        // Count the creeps we have
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.room == room);
-        console.log('Harvesters: ' + harvesters.length);
-        
         var freights = _.filter(Game.creeps, (creep) => creep.memory.role == 'freight' && creep.room == room);
-        console.log('Freights: ' + freights.length);
-        
+        // For the builder, count across all rooms
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
-        console.log('Builders: ' + builders.length);
-        
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.room == room);
-        console.log('Upgraders: ' + upgraders.length);
-
         var defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender' && creep.room == room);
-        console.log('Defenders: ' + defenders.length);
-
         var linkminers = _.filter(Game.creeps, (creep) => creep.memory.role == 'linkminer' && creep.room == room);
-        console.log('Link miners: ' + linkminers.length);
-
         var linkupgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'linkupgrader' && creep.room == room);
-        console.log('Link upgraders: ' + linkupgraders.length);
+        
+        // Shpw some diagnostics
+        if (LOG_DIAGNOSTICS) {
+            console.log("CPU in bucket:", Game.cpu.bucket);
+            console.log("RCL:", rcl);
+            console.log("Energy:", spawn_energy);
+            console.log('Harvesters: ' + harvesters.length);
+            console.log('Freights: ' + freights.length);
+            console.log('Builders: ' + builders.length);
+            console.log('Upgraders: ' + upgraders.length);
+            console.log('Defenders: ' + defenders.length);
+            console.log('Link miners: ' + linkminers.length);
+            console.log('Link upgraders: ' + linkupgraders.length);
+        }
 
         // Get 1 harvester
         if (harvesters.length < harvesters_setpoint && freights.length == 0) {
@@ -179,12 +180,9 @@ module.exports.loop = function () {
         if(targets.length == 0) {
             // We shouldn't build
             builders_setpoint = 0;
-            console.log("There is no building to do");
-        } else {
-            console.log("There is building to do");
         }
         
-        // Then make a builder
+        // Then make a builder, if needed
         if (builders.length < builders_setpoint &&
             harvesters.length >= harvesters_setpoint &&
             defenders.length >= defenders_setpoint &&
@@ -196,7 +194,7 @@ module.exports.loop = function () {
             }
         }
 
-        // Then make a link miner
+        // Then make a link miner (only for higher levels)
         if (rcl >= 5 &&
             linkminers.length < linkminers_setpoint &&
             builders.length >= builders_setpoint &&
@@ -210,7 +208,7 @@ module.exports.loop = function () {
             }
         }
 
-        // Then make a link upgrader
+        // Then make a link upgrader (only for higher levels)
         if (rcl >= 5 &&
             linkupgraders.length < linkupgraders_setpoint &&
             builders.length >= builders_setpoint &&
@@ -224,7 +222,7 @@ module.exports.loop = function () {
             }
         }
 
-        // Then make a few upgraders
+        // Then make a few upgraders (only for lower levels)
         if (rcl <= 5 &&
             upgraders.length < upgraders_setpoint &&
             builders.length >= builders_setpoint &&

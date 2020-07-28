@@ -1,3 +1,5 @@
+const LOG = false;
+
 var roleClaimer = {
 
     /** @param {Creep} creep **/
@@ -9,16 +11,24 @@ var roleClaimer = {
             var flag = flags[i];
 
             if (flag.room) {
-                console.log("Flag has a room");
+                if (LOG) {
+                    console.log("Flag has a room");
+                }
                 if (creep.claimController(flag.room.controller) == ERR_NOT_IN_RANGE) {
-                    console.log("Moving towards flag");
+                    if (LOG) {
+                        console.log("Moving towards flag");
+                    }
                     creep.moveTo(flag);
                 } else {
-                    console.log("Some weird error: maybe this creep can't claim?");
+                    if (LOG) {
+                        console.log("Some weird error: maybe this creep can't claim?");
+                    }
                 }
             } else {
                 var result = creep.moveTo(flag);
-                console.log("Result of move:", result);
+                if (LOG) {
+                    console.log("Result of move:", result);
+                }
             }
         }
     }
