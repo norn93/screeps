@@ -289,7 +289,7 @@ module.exports.loop = function () {
         }
         
         // Send an email if we're being attacked by a big force
-        if (spawn.memory.roomAttacked && defenders_setpoint == 0) {
+        if (spawn.memory.roomAttacked && defenders_setpoint != 0) {
             console.log('We are being attacked by a large force in room' + room + "!");
             Game.notify(
                 'We are being attacked by a large force in room' + room + "!",
@@ -297,7 +297,7 @@ module.exports.loop = function () {
             );
         }
         // Send an email if we're being attacked by a small force
-        if (spawn.memory.roomAttacked && defenders_setpoint != 0) {
+        if (spawn.memory.roomAttacked && defenders_setpoint == 0) {
             console.log("We are being attacked by a small force in room" + room + "...");
             Game.notify(
                 "We are being attacked by a small force in room" + room + "...",
