@@ -20,9 +20,9 @@ module.exports.loop = function () {
     console.log(Game.time, "=======================TICK=======================");
 
     if (LOG_TODO) {
-        console.log("TODO: Toggle the console logs with flags");
         console.log("TODO: Produce a battle report");
-        console.log("TODO: Get link upgraders to send spawn signals in advance, like the miners");
+        console.log("TODO: Check for decreasing CPU");
+        console.log("TODO: Get other creeps to send spawn signals in advance, like the miners");
         console.log("TODO: Add a container miner for the main spwan");
         console.log("TODO: Make a spawning queue system that manages all the spawning");
         console.log("TODO: Add states to defenders");
@@ -288,11 +288,19 @@ module.exports.loop = function () {
             roleTower.run(tower, spawn);
         }
         
-        // Send an email if we're bing attacked
-        if (spawn.memory.roomAttacked) {
-            console.log("We are beng attacked!");
+        // Send an email if we're being attacked by a big force
+        if (spawn.memory.roomAttacked && defenders_setpoint == 0) {
+            console.log('We are being attacked by a large force in room' + room + "!");
             Game.notify(
-                'We are being attacked in room' + Game.room + "!",
+                'We are being attacked by a large force in room' + room + "!",
+                5  // group these notifications for 5 minutes
+            );
+        }
+        // Send an email if we're being attacked by a small force
+        if (spawn.memory.roomAttacked && defenders_setpoint != 0) {
+            console.log("We are being attacked by a small force in room" + room + "...");
+            Game.notify(
+                "We are being attacked by a small force in room" + room + "...",
                 5  // group these notifications for 5 minutes
             );
         }
