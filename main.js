@@ -15,7 +15,7 @@ var claimRoom = require('claimRoom');
 const LOG_TODO = false;
 const LOG_DIAGNOSTICS = false;
 
-var cpu_lpf = 0;
+var cpu_lpf = Game.cpu.bucket;
 const cpu_lpf_alpha = 0.05;
 
 module.exports.loop = function () {
@@ -33,6 +33,15 @@ module.exports.loop = function () {
         console.log("TODO: Add healers");
         console.log("TODO: Add wall repairers");
         console.log("TODO: Automate testing code?");
+    }
+
+    // Make pixels when we have spare CPU in our bucket
+    var new_cpu_lpf = cpu_lpf * (1 - cpu_lpf_alpha) + Game.cpu.bucket * cpu_lpf_alpha;
+    console.log("Averaged CPU:", new_cpu_lpf);
+    cpu_lpf = new_cpu_lpf;
+    if (Game.cpu.bucket > 9000) {
+        Game.cpu.generatePixel();
+        console.log("Created a pixel!")
     }
 
     for (var r in Game.rooms) {
@@ -96,15 +105,6 @@ module.exports.loop = function () {
 
         // Check the room controller level
         var rcl = spawn.room.controller.level;
-        
-        // Make pixels when we have spare CPU in our bucket
-        var new_cpu_lpf = cpu_lpf * (1 - cpu_lpf_alpha) + Game.cpu.bucket * cpu_lpf_alpha;
-        console.log(new_cpu_lpf);
-        cpu_lpf = new_cpu_lpf;
-        if (Game.cpu.bucket > 9000) {
-            Game.cpu.generatePixel();
-            console.log("Created a pixel!")
-        }
         
         // Check how much spawning energywe have
         var spawn_energy = spawn.room.energyAvailable;
