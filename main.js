@@ -16,7 +16,7 @@ module.exports.loop = function () {
     
     console.log(Game.time, "=======================TICK=======================");
 
-    console.log("TODO: Expand, and consolidate");
+    console.log("TODO: Toggle the console logs with flags");
     console.log("TODO: Produce a battle report");
     console.log("TODO: Get link upgraders to send spawn signals in advance, like the miners");
     console.log("TODO: Add a container miner for the main spwan");
@@ -47,7 +47,7 @@ module.exports.loop = function () {
         var freights_setpoint = 1;
         var harvesters_setpoint = 2;
         var freights_setpoint = 1;
-        var builders_setpoint = 1;
+        var builders_setpoint = 2;
         var upgraders_setpoint = 6;
         var linkminers_setpoint = 1;
         var linkupgraders_setpoint = 4;
@@ -111,7 +111,7 @@ module.exports.loop = function () {
         var freights = _.filter(Game.creeps, (creep) => creep.memory.role == 'freight' && creep.room == room);
         console.log('Freights: ' + freights.length);
         
-        var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.room == room);
+        var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
         console.log('Builders: ' + builders.length);
         
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.room == room);
