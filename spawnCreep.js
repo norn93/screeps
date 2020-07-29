@@ -33,7 +33,7 @@ function spawnCreep(spawn, role, work=2, carry=1, move=1, attack=0, tough=0, cla
         var result = spawn.spawnCreep(parts, name, {memory: {role: role}});
         if (result != 0) {
             if (LOG) {
-                console.log("Failed...");
+                console.log("Failed:", result);
             }
         }
     } else {
