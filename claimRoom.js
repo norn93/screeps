@@ -1,6 +1,6 @@
 var spawnCreep = require('spawnCreep');
 
-const LOG = true;
+const LOG = false;
 
 function claimRoom() {
     if (LOG) {
