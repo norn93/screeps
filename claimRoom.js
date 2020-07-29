@@ -48,7 +48,7 @@ function claimRoom() {
     }
 
     if (claimers.length < claimer_setpoint) {
-        spawnCreep("claimer", 0, 0, 2, 0, 0, 1);
+        spawnCreep(Game.spawns['Spawn1'].room, "claimer", 0, 0, 4, 0, 0, 1);
     }
 }
 

@@ -112,7 +112,7 @@ module.exports.loop = function () {
         }
 
         // Check the room controller level
-        var rcl = spawn.room.controller.level;
+        var rcl = room.controller.level;
         
         // Check how much spawning energywe have
         var spawn_energy = spawn.room.energyAvailable;
