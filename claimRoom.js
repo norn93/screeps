@@ -1,6 +1,6 @@
 var spawnCreep = require('spawnCreep');
 
-const LOG = false;
+const LOG = true;
 
 function claimRoom() {
     if (LOG) {
@@ -48,7 +48,7 @@ function claimRoom() {
     }
 
     if (claimers.length < claimer_setpoint) {
-        spawnCreep(Game.spawns['Spawn1'].room, "claimer", 0, 0, 4, 0, 0, 1);
+        spawnCreep(Game.spawns['Spawn1'], "claimer", 0, 0, 4, 0, 0, 1);
     }
 }
 
