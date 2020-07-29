@@ -1,4 +1,4 @@
-const LOG = false;
+const LOG = true;
 
 function spawnCreep(spawn, role, work=2, carry=1, move=1, attack=0, tough=0, claim=0) {
     
