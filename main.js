@@ -13,7 +13,7 @@ var linkNetwork = require('linkNetwork');
 var claimRoom = require('claimRoom');
 
 const LOG_TODO = false;
-const LOG_DIAGNOSTICS = false;
+const LOG_DIAGNOSTICS = true;
 
 var cpu_lpf = Game.cpu.bucket;
 const cpu_lpf_alpha = 0.05;
@@ -23,8 +23,8 @@ module.exports.loop = function () {
     console.log(Game.time, "=======================TICK=======================");
 
     if (LOG_TODO) {
-        console.log("TODO: Produce a battle report");
-        console.log("TODO: Check for decreasing CPU");
+        console.log("TODO: Claim a 3rd room!");
+        console.log("TODO: Produce a full battle report");
         console.log("TODO: Get other creeps to send spawn signals in advance, like the miners");
         console.log("TODO: Add a container miner for the main spwan");
         console.log("TODO: Make a spawning queue system that manages all the spawning");
