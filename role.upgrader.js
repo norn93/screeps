@@ -14,7 +14,11 @@ var roleUpgrader = {
             if (creep.pos.isNearTo(creep.room.controller)) {
                 creep.upgradeController(creep.room.controller);
             } else {
-                creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
+                creep.moveTo(creep.room.controller,
+                    {
+                        visualizePathStyle: {stroke: '#ffffff'},
+                        reusePath: 50
+                    });
             }
         }
         else {
@@ -22,7 +26,11 @@ var roleUpgrader = {
             if (creep.pos.isNearTo(sources[0])) {
                 creep.harvest(sources[0]);
             } else {
-                creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
+                creep.moveTo(sources[0],
+                    {
+                        visualizePathStyle: {stroke: '#ffffff'},
+                        reusePath: 50
+                    });
             }
         }
     }
