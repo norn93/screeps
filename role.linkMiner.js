@@ -1,3 +1,5 @@
+var spawnCreep = require('spawnCreep');
+
 var roleLinkMiner = {
 
     /** @param {Creep} creep **/
@@ -75,11 +77,8 @@ var roleLinkMiner = {
             const role = "linkminer";
             var name = role + Game.time;
             const parts = [WORK, WORK, WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE];
-            const replaced = spawn.spawnCreep(parts, name, {memory: {role: role}});
-            if (replaced == 0) {
-                creep.memory.replaced = true;
-                // console.log("Success!");
-            }
+            spawnCreep(spawn, "linkminer", 5, 1, 3);
+            creep.memory.replaced = true;
         }
     }
 };
