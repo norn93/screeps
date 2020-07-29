@@ -266,6 +266,8 @@ module.exports.loop = function () {
                 {align: 'left', opacity: 0.8});
         }
 
+        const startCpu = Game.cpu.getUsed();
+
         // Assign roles to creeps
         for (var name in Game.creeps) {
             var creep = Game.creeps[name];
@@ -294,6 +296,9 @@ module.exports.loop = function () {
                 roleClaimer.run(creep, spawn);
             }
         }
+
+        const elapsed = Game.cpu.getUsed() - startCpu;
+        console.log("Total CPU used by creeps:", elapsed);
 
         // Get a list of towers in the room
         var towers = spawn.room.find(FIND_STRUCTURES, {
@@ -336,5 +341,8 @@ module.exports.loop = function () {
 
         // Run room claimer
         claimRoom();
+
+        const total_elapsed = Game.cpu.getUsed();
+        console.log("Total CPU used", total_elapsed);
     }
 }
