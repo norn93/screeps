@@ -220,6 +220,7 @@ module.exports.loop = function () {
             harvesters.length >= harvesters_setpoint &&
             defenders.length >= defenders_setpoint &&
             freights.length >= freights_setpoint) {
+            console.log("We should spawn a link miner!!!!");
             if (spawn_energy < (5*100 + 1*50 + 3*50)) {
                 spawnCreep(spawn, "linkminer", 2, 1, 1);
             } else {
