@@ -75,7 +75,7 @@ var roleFreight = {
                     }
                 });
                 // ...then links (if we have a good amount of energy)
-                if (targets.length == 0 && total_stored_energy > 500000) {
+                if (targets.length == 0 && total_stored_energy > 300000) {
                     targets = creep.pos.findInRange(FIND_STRUCTURES, 10, {
                         filter: (structure) => {
                             return (
