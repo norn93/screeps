@@ -61,6 +61,9 @@ module.exports.loop = function () {
         const spawn = room.find(FIND_MY_STRUCTURES, {
             filter: { structureType: STRUCTURE_SPAWN }
         })[0];
+        if (!spawn) {
+            continue; //  This isn't our room
+        }
 
         // Get this room's storage
         const storage = room.find(FIND_MY_STRUCTURES, {
