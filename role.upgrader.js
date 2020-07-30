@@ -20,8 +20,7 @@ var roleUpgrader = {
                         reusePath: 50
                     });
             }
-        }
-        else {
+        } else {
             var sources = creep.room.find(FIND_SOURCES);
             if (creep.pos.isNearTo(sources[0])) {
                 creep.harvest(sources[0]);
