@@ -1,7 +1,12 @@
 var roleUpgrader = {
 
     /** @param {Creep} creep **/
-    run: function(creep, spawn) {
+    run: function(creep) {
+
+        // Get this room's spawn
+        const spawn = room.find(FIND_MY_STRUCTURES, {
+            filter: { structureType: STRUCTURE_SPAWN }
+        })[0];
 
         if (creep.memory.upgrading && creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.upgrading = false;

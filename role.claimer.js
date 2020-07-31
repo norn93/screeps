@@ -3,7 +3,7 @@ const LOG = false;
 var roleClaimer = {
 
     /** @param {Creep} creep **/
-    run: function(creep, spawn) {
+    run: function(creep) {
         
         var flags = Game.flags;
 

@@ -1,7 +1,12 @@
 var roleHarvester = {
 
     /** @param {Creep} creep **/
-    run: function(creep, spawn) {
+    run: function(creep) {
+
+        // Get this room's spawn
+        const spawn = room.find(FIND_MY_STRUCTURES, {
+            filter: { structureType: STRUCTURE_SPAWN }
+        })[0];
 
         // If we're at least partly empty, harvest
         if(creep.store.getFreeCapacity() > 0) {

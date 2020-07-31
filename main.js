@@ -280,28 +280,28 @@ module.exports.loop = function () {
         for (var name in Game.creeps) {
             var creep = Game.creeps[name];
             if(creep.memory.role == 'harvester') {
-                roleHarvester.run(creep, spawn);
+                roleHarvester.run(creep);
             }
             if(creep.memory.role == 'upgrader') {
-                roleUpgrader.run(creep, spawn);
+                roleUpgrader.run(creep);
             }
             if(creep.memory.role == 'builder') {
-                roleBuilder.run(creep, spawn);
+                roleBuilder.run(creep);
             }
             if(creep.memory.role == 'freight') {
-                roleFreight.run(creep, spawn);
+                roleFreight.run(creep);
             }
             if(creep.memory.role == 'defender') {
-                roleDefender.run(creep, spawn);
+                roleDefender.run(creep);
             }
             if(creep.memory.role == 'linkminer') {
-                roleLinkMiner.run(creep, spawn);
+                roleLinkMiner.run(creep);
             }
             if(creep.memory.role == 'linkupgrader') {
-                roleLinkUpgrader.run(creep, spawn);
+                roleLinkUpgrader.run(creep);
             }
             if(creep.memory.role == 'claimer') {
-                roleClaimer.run(creep, spawn);
+                roleClaimer.run(creep);
             }
         }
 

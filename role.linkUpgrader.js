@@ -1,11 +1,17 @@
 var roleLinkUpgrader = {
 
     /** @param {Creep} creep **/
-    run: function(creep, spawn) {
+    run: function(creep) {
         // Calculate the upgrader state
         // States:
         // Upgrading (0)
         // Collecting (1)
+
+        // Get this room's spawn
+        const spawn = room.find(FIND_MY_STRUCTURES, {
+            filter: { structureType: STRUCTURE_SPAWN }
+        })[0];
+        
         if (creep.memory.status != 1 && creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.status = 1;
             creep.say("Collecting");

@@ -3,11 +3,17 @@ var spawnCreep = require('spawnCreep');
 var roleLinkMiner = {
 
     /** @param {Creep} creep **/
-    run: function(creep, spawn) {
+    run: function(creep) {
         // Calculate the miner state
         // States:
         // Mining (0)
         // Emptying (1)
+
+        // Get this room's spawn
+        const spawn = room.find(FIND_MY_STRUCTURES, {
+            filter: { structureType: STRUCTURE_SPAWN }
+        })[0];
+        
         if (creep.memory.status != 1 && creep.store.getFreeCapacity() == 0) {
             creep.memory.status = 1;
             creep.say("Emptying");

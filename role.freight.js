@@ -1,7 +1,12 @@
 var roleFreight = {
 
     /** @param {Creep} creep **/
-    run: function(creep, spawn) {
+    run: function(creep) {
+
+        // Get this room's spawn
+        const spawn = room.find(FIND_MY_STRUCTURES, {
+            filter: { structureType: STRUCTURE_SPAWN }
+        })[0];
 
         var total_stored_energy = 0;
         var storage = creep.room.find(FIND_STRUCTURES, {

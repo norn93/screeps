@@ -1,7 +1,12 @@
 var roleDefender = {
 
     /** @param {Creep} creep **/
-    run: function(creep, spawn) {
+    run: function(creep) {
+
+        // Get this room's spawn
+        const spawn = room.find(FIND_MY_STRUCTURES, {
+            filter: { structureType: STRUCTURE_SPAWN }
+        })[0];
 
         // Choose creep state
         if(creep.memory.defending && spawn.memory.roomAttacked == false) {
@@ -57,20 +62,19 @@ var roleDefender = {
             } else {
                 // Time to die
                 // Go to a partially empty container
-                var container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (
-                            structure.structureType == STRUCTURE_CONTAINER &&
-                            structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0
-                        );
-                    }
-                });
-                if(creep.moveTo(container) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(container, {visualizePathStyle: {stroke: '#ffffff'}});
-                } else {
-                    spawn.recycleCreep(creep);
-                }
-
+                // var container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                //     filter: (structure) => {
+                //         return (
+                //             structure.structureType == STRUCTURE_CONTAINER &&
+                //             structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0
+                //         );
+                //     }
+                // });
+                // if(creep.moveTo(container) == ERR_NOT_IN_RANGE) {
+                //     creep.moveTo(container, {visualizePathStyle: {stroke: '#ffffff'}});
+                // } else {
+                //     spawn.recycleCreep(creep);
+                // }
             }
         }
     }

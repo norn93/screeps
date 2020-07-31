@@ -1,7 +1,7 @@
 var roleBuilder = {
 
     /** @param {Creep} creep **/
-    run: function(creep, spawn) {
+    run: function(creep) {
 
         // Choose creep state
         if(creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
