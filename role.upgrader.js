@@ -21,11 +21,11 @@ var roleUpgrader = {
                     });
             }
         } else {
-            var sources = creep.room.find(FIND_SOURCES);
-            if (creep.pos.isNearTo(sources[0])) {
-                creep.harvest(sources[0]);
+            var source = creep.pos.findClosestByPath(FIND_SOURCES);
+            if (creep.pos.isNearTo(source)) {
+                creep.harvest(source);
             } else {
-                creep.moveTo(sources[0],
+                creep.moveTo(source,
                     {
                         visualizePathStyle: {stroke: '#ffffff'},
                         reusePath: 50

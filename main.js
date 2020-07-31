@@ -23,9 +23,12 @@ module.exports.loop = function () {
     console.log(Game.time, "=======================TICK=======================");
 
     if (LOG_TODO) {
+        console.log("TODO: Use count to work out maximum number of creeps at a source");
+        console.log("TODO: Work out what's going on with the link miners: stop the game evaluating all creeps each time");
+        console.log("TODO: Change setpoints based on the number of buildings present");
+        console.log("TODO: Add container mining");
         console.log("TODO: Lower the CPU usage");
         console.log("TODO: Claim a 3rd room");
-        console.log("TODO: Work out what's going on with the link miners");
         console.log("TODO: Produce a full battle report");
         console.log("TODO: Get other creeps to send spawn signals in advance, like the miners");
         console.log("TODO: Add a container miner for the main spwan");
