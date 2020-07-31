@@ -114,7 +114,6 @@ module.exports.loop = function () {
         // Check if we need a freight in this room
         if (!storage) {
             freights_setpoint = 0;
-        }
 
         // Check the room controller level
         var rcl = room.controller.level;
@@ -131,6 +130,11 @@ module.exports.loop = function () {
         var defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender' && creep.room == room);
         var linkminers = _.filter(Game.creeps, (creep) => creep.memory.role == 'linkminer' && creep.room == room);
         var linkupgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'linkupgrader' && creep.room == room);
+
+        // Update the number of harvesters
+        if (rcl < 4) {
+            harvesters_setpoint = 4;
+        }
         
         // Shpw some diagnostics
         if (LOG_DIAGNOSTICS) {
