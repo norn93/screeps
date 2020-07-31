@@ -274,40 +274,6 @@ module.exports.loop = function () {
                 {align: 'left', opacity: 0.8});
         }
 
-        const startCpu = Game.cpu.getUsed();
-
-        // Assign roles to creeps
-        for (var name in Game.creeps) {
-            var creep = Game.creeps[name];
-            if(creep.memory.role == 'harvester') {
-                roleHarvester.run(creep, spawn);
-            }
-            if(creep.memory.role == 'upgrader') {
-                roleUpgrader.run(creep, spawn);
-            }
-            if(creep.memory.role == 'builder') {
-                roleBuilder.run(creep, spawn);
-            }
-            if(creep.memory.role == 'freight') {
-                roleFreight.run(creep, spawn);
-            }
-            if(creep.memory.role == 'defender') {
-                roleDefender.run(creep, spawn);
-            }
-            if(creep.memory.role == 'linkminer') {
-                roleLinkMiner.run(creep, spawn);
-            }
-            if(creep.memory.role == 'linkupgrader') {
-                roleLinkUpgrader.run(creep, spawn);
-            }
-            if(creep.memory.role == 'claimer') {
-                roleClaimer.run(creep, spawn);
-            }
-        }
-
-        const elapsed = Game.cpu.getUsed() - startCpu;
-        console.log("Total CPU used by creeps:", elapsed);
-
         // Get a list of towers in the room
         var towers = spawn.room.find(FIND_STRUCTURES, {
             filter: (structure) => {
@@ -350,7 +316,37 @@ module.exports.loop = function () {
         // Run room claimer
         claimRoom();
 
-        const total_elapsed = Game.cpu.getUsed();
-        console.log("Total CPU used", total_elapsed);
     }
+
+    // Run creeps
+    for (var name in Game.creeps) {
+        var creep = Game.creeps[name];
+        if(creep.memory.role == 'harvester') {
+            roleHarvester.run(creep, spawn);
+        }
+        if(creep.memory.role == 'upgrader') {
+            roleUpgrader.run(creep, spawn);
+        }
+        if(creep.memory.role == 'builder') {
+            roleBuilder.run(creep, spawn);
+        }
+        if(creep.memory.role == 'freight') {
+            roleFreight.run(creep, spawn);
+        }
+        if(creep.memory.role == 'defender') {
+            roleDefender.run(creep, spawn);
+        }
+        if(creep.memory.role == 'linkminer') {
+            roleLinkMiner.run(creep, spawn);
+        }
+        if(creep.memory.role == 'linkupgrader') {
+            roleLinkUpgrader.run(creep, spawn);
+        }
+        if(creep.memory.role == 'claimer') {
+            roleClaimer.run(creep, spawn);
+        }
+    }
+
+    const total_elapsed = Game.cpu.getUsed();
+    console.log("Total CPU used", total_elapsed);
 }
