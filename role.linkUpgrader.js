@@ -8,7 +8,7 @@ var roleLinkUpgrader = {
         // Collecting (1)
 
         // Get this room's spawn
-        const spawn = room.find(FIND_MY_STRUCTURES, {
+        const spawn = creep.room.find(FIND_MY_STRUCTURES, {
             filter: { structureType: STRUCTURE_SPAWN }
         })[0];
         
