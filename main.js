@@ -24,12 +24,12 @@ module.exports.loop = function () {
 
     if (LOG_TODO) {
         console.log("TODO: Make sure that things take a step back if there's nothing for them to do. ALso, there is always something to do... get the harvesters to change tasks as requried");
-        console.log("TODO: Use count to work out maximum number of creeps at a source");
-        console.log("TODO: Work out what's going on with the link miners: stop the game evaluating all creeps each time");
+        console.log("TODO: Use count to work out maximum number of creeps at a source??");
+        console.log("TODO: Work out what's going on with the link miners: stop the game evaluating ALL creeps each time");
         console.log("TODO: Change setpoints based on the number of buildings present");
-        console.log("TODO: Add container mining");
+        console.log("TODO: Add container mining!");
         console.log("TODO: Lower the CPU usage");
-        console.log("TODO: Claim a 3rd room");
+        console.log("TODO: Claim another room");
         console.log("TODO: Produce a full battle report");
         console.log("TODO: Get other creeps to send spawn signals in advance, like the miners");
         console.log("TODO: Add a container miner for the main spwan");
@@ -56,6 +56,18 @@ module.exports.loop = function () {
         Game.cpu.generatePixel();
         console.log("Created a pixel!")
         cpu_lpf = Game.cpu.bucket - 5000; // Try to reset correctly
+    }
+
+    // Clear memory
+    for (var name in Memory.creeps) {
+        if(!Game.creeps[name]) {
+            delete Memory.creeps[name];
+        }
+    }
+    for (var flag in Memory.flags) {
+        if(!Game.flags[flag]) {
+            delete Memory.flags[flag];
+        }
     }
 
     for (var r in Game.rooms) {
@@ -85,14 +97,6 @@ module.exports.loop = function () {
         var upgraders_setpoint = 2;
         var linkminers_setpoint = 1;
         var linkupgraders_setpoint = 4;
-
-        // Clear memory
-        for (var name in Memory.creeps) {
-            if(!Game.creeps[name]) {
-                delete Memory.creeps[name];
-                // console.log('Clearing non-existing creep memory:', name);
-            }
-        }
         
         // Check if we're being attacked or not
         var hostiles = spawn.room.find(FIND_HOSTILE_CREEPS);
