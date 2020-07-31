@@ -23,6 +23,7 @@ module.exports.loop = function () {
     console.log(Game.time, "=======================TICK=======================");
 
     if (LOG_TODO) {
+        console.log("TODO: Make sure that things take a step back if there's nothing for them to do. ALso, there is always something to do... get the harvesters to change tasks as requried");
         console.log("TODO: Use count to work out maximum number of creeps at a source");
         console.log("TODO: Work out what's going on with the link miners: stop the game evaluating all creeps each time");
         console.log("TODO: Change setpoints based on the number of buildings present");
@@ -257,7 +258,7 @@ module.exports.loop = function () {
             harvesters.length >= harvesters_setpoint &&
             defenders.length >= defenders_setpoint &&
             freights.length >= freights_setpoint) {
-            if (spawn_energy < 450) {
+            if (spawn_energy < 550) {
                 spawnCreep(spawn, "upgrader", 2, 1, 1);
             } else {
                 spawnCreep(spawn, "upgrader", 3, 2, 3);
