@@ -114,6 +114,7 @@ module.exports.loop = function () {
         // Check if we need a freight in this room
         if (!storage) {
             freights_setpoint = 0;
+        }
 
         // Check the room controller level
         var rcl = room.controller.level;
