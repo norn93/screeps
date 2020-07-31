@@ -69,6 +69,11 @@ module.exports.loop = function () {
             delete Memory.flags[flag];
         }
     }
+    for (var spawn in Memory.spawns) {
+        if(!Game.spawns[spawn]) {
+            delete Memory.spawns[spawn];
+        }
+    }
 
     for (var r in Game.rooms) {
         var room = Game.rooms[r];
