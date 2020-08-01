@@ -23,7 +23,9 @@ module.exports.loop = function () {
     console.log(Game.time, "=======================TICK=======================");
 
     if (LOG_TODO) {
-        console.log("TODO: Make sure that things take a step back if there's nothing for them to do. ALso, there is always something to do... get the harvesters to change tasks as requried");
+        console.log("TODO: Get the harvesters to build if they have nothing else to do as requried");
+        console.log("TODO: Get the harvesters to only harvest from the source closest to spawn");
+        console.log("TODO: Get the upgraders to only harvest from the source closest to room controller");
         console.log("TODO: Use count to work out maximum number of creeps at a source??");
         console.log("TODO: Work out what's going on with the link miners: stop the game evaluating ALL creeps each time");
         console.log("TODO: Change setpoints based on the number of buildings present");
@@ -34,6 +36,7 @@ module.exports.loop = function () {
         console.log("TODO: Get other creeps to send spawn signals in advance, like the miners");
         console.log("TODO: Add a container miner for the main spwan");
         console.log("TODO: Make a spawning queue system that manages all the spawning");
+        console.log("TODO: Add adaptive spawning to spawn the best possible creep up to a max energy/stats");
         console.log("TODO: Add states to defenders");
         console.log("TODO: Add ability for defenders to move on ramparts only");
         console.log("TODO: Add healers");
