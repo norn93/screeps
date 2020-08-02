@@ -172,9 +172,9 @@ module.exports.loop = function () {
             if (spawn_energy <= 300) {
                 spawnCreep(spawn, "harvester", 2, 1, 1);
             } else if (spawn_energy <= 700) {
-                spawnCreep(spawn, "harvester", 4, 2, 4);
+                spawnCreep(spawn, "harvester", 3, 2, 3);
             } else {
-                spawnCreep(spawn, "harvester", 5, 5, 5);
+                spawnCreep(spawn, "harvester", 4, 4, 4);
             }
         }
         
@@ -206,9 +206,9 @@ module.exports.loop = function () {
             if (spawn_energy <= 300) {
                 spawnCreep(spawn, "harvester", 2, 1, 1);
             } else if (spawn_energy <= 700) {
-                spawnCreep(spawn, "harvester", 4, 2, 4);
+                spawnCreep(spawn, "harvester", 3, 2, 3);
             } else {
-                spawnCreep(spawn, "harvester", 5, 5, 5);
+                spawnCreep(spawn, "harvester", 4, 4, 4);
             }
         }
 

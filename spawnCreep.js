@@ -4,7 +4,7 @@ function spawnCreep(spawn, role, work=2, carry=1, move=1, attack=0, tough=0, cla
     
     // New spawning system based on the energy we have
     var energy = spawn.room.energyAvailable;
-    const cost = {"work": 200, "carry": 50, "move": 50};
+    const cost = {"work": 100, "carry": 50, "move": 50};
     if (role == "builder" || role == "harvester") {
         const recipe = {"work": 3, "carry": 1, "move": 2};
         var variable_cost = 0;
