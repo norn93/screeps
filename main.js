@@ -13,7 +13,7 @@ var linkNetwork = require('linkNetwork');
 var claimRoom = require('claimRoom');
 
 const LOG_TODO = false;
-const LOG_DIAGNOSTICS = false;
+const LOG_DIAGNOSTICS = true;
 
 var cpu_lpf = Game.cpu.bucket;
 const cpu_lpf_alpha = 0.05;
