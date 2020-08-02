@@ -20,6 +20,8 @@ function spawnCreep(spawn, role, work=2, carry=1, move=1, attack=0, tough=0, cla
         for (var i in recipe) {
             console.log(recipe[i] * x, "of", i);
         }
+
+        // This system doesn't quite work
     }
 
     var roles = ["builder", "harvester", "freight", "upgrader", "defender", "linkminer", "linkupgrader", "claimer"];

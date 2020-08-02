@@ -26,7 +26,7 @@ var roleUpgrader = {
                     });
             }
         } else {
-            var source = creep.pos.findClosestByPath(FIND_SOURCES);
+            var source = creep.pos.findClosestByRange(FIND_SOURCES);
             if (creep.pos.isNearTo(source)) {
                 creep.harvest(source);
             } else {
