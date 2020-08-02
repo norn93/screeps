@@ -11,14 +11,14 @@ function spawnCreep(spawn, role, work=2, carry=1, move=1, attack=0, tough=0, cla
         for (var i in recipe) {
             variable_cost += recipe[i] * cost[i];
         }
-        console.log("Variable cost:", variable_cost);
+        // console.log("Variable cost:", variable_cost);
 
         var x = energy/variable_cost;
-        console.log("Build factor:", x);
+        // console.log("Build factor:", x);
 
-        console.log("Recipe:");
+        // console.log("Recipe:");
         for (var i in recipe) {
-            console.log(recipe[i] * x, "of", i);
+            // console.log(recipe[i] * x, "of", i);
         }
 
         // This system doesn't quite work
