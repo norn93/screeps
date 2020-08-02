@@ -99,9 +99,9 @@ module.exports.loop = function () {
         // Constants
         var defenders_setpoint = 3;
         var freights_setpoint = 1;
-        var harvesters_setpoint = 2;
+        var harvesters_setpoint = 3;
         var freights_setpoint = 1;
-        var builders_setpoint = 2;
+        var builders_setpoint = 3;
         var upgraders_setpoint = 2;
         var linkminers_setpoint = 1;
         var linkupgraders_setpoint = 4;
@@ -169,10 +169,12 @@ module.exports.loop = function () {
 
         // Get 1 harvester
         if (harvesters.length < harvesters_setpoint && freights.length == 0) {
-            if (spawn_energy < 4 * 100 + 2 * 50 + 4 * 50) {
+            if (spawn_energy <= 300) {
                 spawnCreep(spawn, "harvester", 2, 1, 1);
-            } else {
+            } else if (spawn_energy <= 700) {
                 spawnCreep(spawn, "harvester", 4, 2, 4);
+            } else {
+                spawnCreep(spawn, "harvester", 5, 5, 5);
             }
         }
         
@@ -201,10 +203,12 @@ module.exports.loop = function () {
         if (harvesters.length < harvesters_setpoint &&
             defenders.length >= defenders_setpoint &&
             freights.length >= freights_setpoint) {
-            if (spawn_energy < 4 * 100 + 2 * 50 + 4 * 50) {
+            if (spawn_energy <= 300) {
                 spawnCreep(spawn, "harvester", 2, 1, 1);
-            } else {
+            } else if (spawn_energy <= 700) {
                 spawnCreep(spawn, "harvester", 4, 2, 4);
+            } else {
+                spawnCreep(spawn, "harvester", 5, 5, 5);
             }
         }
 
@@ -227,8 +231,10 @@ module.exports.loop = function () {
             harvesters.length >= harvesters_setpoint &&
             defenders.length >= defenders_setpoint &&
             freights.length >= freights_setpoint) {
-            if (spawn_energy < 1000) {
+            if (spawn_energy <= 300) {
                 spawnCreep(spawn, "builder", 2, 1, 1);
+            } else if (spawn_energy <= 700) {
+                spawnCreep(spawn, "builder", 4, 2, 4);
             } else {
                 spawnCreep(spawn, "builder", 5, 5, 5);
             }
