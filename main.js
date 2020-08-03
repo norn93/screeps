@@ -99,9 +99,9 @@ module.exports.loop = function () {
         // Constants
         var defenders_setpoint = 3;
         var freights_setpoint = 1;
-        var harvesters_setpoint = 3;
+        var harvesters_setpoint = 2;
         var freights_setpoint = 1;
-        var builders_setpoint = 3;
+        var builders_setpoint = 2;
         var upgraders_setpoint = 2;
         var linkminers_setpoint = 1;
         var linkupgraders_setpoint = 4;
@@ -171,10 +171,12 @@ module.exports.loop = function () {
         if (harvesters.length < harvesters_setpoint && freights.length == 0) {
             if (spawn_energy <= 300) {
                 spawnCreep(spawn, "harvester", 2, 1, 1);
-            } else if (spawn_energy <= 700) {
+            } else if (spawn_energy <= 550) {
                 spawnCreep(spawn, "harvester", 3, 2, 3);
+            } else if (spawn_energy <= 750) {
+                spawnCreep(spawn, "harvester", 4, 3, 4);
             } else {
-                spawnCreep(spawn, "harvester", 4, 4, 4);
+                spawnCreep(spawn, "harvester", 5, 4, 5);
             }
         }
         
@@ -205,10 +207,12 @@ module.exports.loop = function () {
             freights.length >= freights_setpoint) {
             if (spawn_energy <= 300) {
                 spawnCreep(spawn, "harvester", 2, 1, 1);
-            } else if (spawn_energy <= 700) {
+            } else if (spawn_energy <= 550) {
                 spawnCreep(spawn, "harvester", 3, 2, 3);
+            } else if (spawn_energy <= 750) {
+                spawnCreep(spawn, "harvester", 4, 3, 4);
             } else {
-                spawnCreep(spawn, "harvester", 4, 4, 4);
+                spawnCreep(spawn, "harvester", 5, 4, 5);
             }
         }
 
@@ -233,10 +237,12 @@ module.exports.loop = function () {
             freights.length >= freights_setpoint) {
             if (spawn_energy <= 300) {
                 spawnCreep(spawn, "builder", 2, 1, 1);
-            } else if (spawn_energy <= 700) {
-                spawnCreep(spawn, "builder", 4, 2, 4);
+            } else if (spawn_energy <= 550) {
+                spawnCreep(spawn, "builder", 3, 2, 3);
+            } else if (spawn_energy <= 750) {
+                spawnCreep(spawn, "builder", 4, 3, 4);
             } else {
-                spawnCreep(spawn, "builder", 5, 5, 5);
+                spawnCreep(spawn, "builder", 5, 4, 5);
             }
         }
 
@@ -278,10 +284,12 @@ module.exports.loop = function () {
             freights.length >= freights_setpoint) {
             if (spawn_energy <= 300) {
                 spawnCreep(spawn, "upgrader", 2, 1, 1);
-            } else if (spawn_energy <= 850) {
+            } else if (spawn_energy <= 550) {
                 spawnCreep(spawn, "upgrader", 3, 2, 3);
+            } else if (spawn_energy <= 750) {
+                spawnCreep(spawn, "upgrader", 4, 3, 4);
             } else {
-                spawnCreep(spawn, "upgrader", 4, 4, 4);
+                spawnCreep(spawn, "upgrader", 5, 4, 5);
             }
         }
         
