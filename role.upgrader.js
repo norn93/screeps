@@ -22,7 +22,7 @@ var roleUpgrader = {
                 creep.moveTo(creep.room.controller,
                     {
                         visualizePathStyle: {stroke: '#ffffff'},
-                        reusePath: 5
+                        reusePath: 6
                     });
             }
         } else {
