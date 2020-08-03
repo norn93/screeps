@@ -74,14 +74,23 @@ var roleFreight = {
                 var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (
-                            structure.structureType == STRUCTURE_EXTENSION ||
                             structure.structureType == STRUCTURE_SPAWN) &&
                             structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                     }
                 });
+                // ...then extensions
+                if (targets.length == 0) {
+                    targets = [creep.pos.findClosestByPath(FIND_STRUCTURES, {
+                        filter: (structure) => {
+                            return (
+                                structure.structureType == STRUCTURE_EXTENSION ||) &&
+                                structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                        }
+                    })];
+                }
                 // ...then links (if we have a good amount of energy)
                 if (targets.length == 0 && total_stored_energy > 300000) {
-                    targets = creep.pos.findInRange(FIND_STRUCTURES, 10, {
+                    targets = creep.pos.findInRange(FIND_STRUCTURES, 5, {
                         filter: (structure) => {
                             return (
                                 structure.structureType == STRUCTURE_LINK) &&
