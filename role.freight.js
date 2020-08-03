@@ -89,6 +89,8 @@ var roleFreight = {
                     });
                     if (targets) {
                         targets = [targets]; // weird array thing
+                    } else {
+                        targets = [];
                     }
                 }
                 // ...then links (if we have a good amount of energy)
