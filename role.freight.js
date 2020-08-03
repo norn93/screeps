@@ -80,13 +80,16 @@ var roleFreight = {
                 });
                 // ...then extensions
                 if (targets.length == 0) {
-                    targets = [creep.pos.findClosestByPath(FIND_STRUCTURES, {
+                    targets = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                         filter: (structure) => {
                             return (
                                 structure.structureType == STRUCTURE_EXTENSION) &&
                                 structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                         }
-                    })];
+                    });
+                    if (targets) {
+                        targets = [targets]; // weird array thing
+                    }
                 }
                 // ...then links (if we have a good amount of energy)
                 if (targets.length == 0 && total_stored_energy > 300000) {
