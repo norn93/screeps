@@ -288,8 +288,10 @@ module.exports.loop = function () {
                 spawnCreep(spawn, "upgrader", 3, 2, 3);
             } else if (spawn_energy <= 750) {
                 spawnCreep(spawn, "upgrader", 4, 3, 4);
-            } else {
+            } else if (spawn_energy <= 950) {
                 spawnCreep(spawn, "upgrader", 5, 4, 5);
+            } else {
+                spawnCreep(spawn, "upgrader", 6, 4, 6);
             }
         }
         
